@@ -14,6 +14,18 @@ git clone https://github.com/Teatov/questa
 npm i
 ```
 
+## Настройка IDE
+
+Если вы используете VSCode, то рекомендуется иметь следующие расширения:
+
+- ESLint
+- Prettier - Code Formatter
+- Svelte for VS Code
+- Tailwind CSS IntelliSense
+- PostCSS Language Support
+- Code Spell Checker
+- Russian - Code Spell Checker
+
 ## Разработка
 
 После настройки проекта, запустите сервер в режиме разработки:
