@@ -14,7 +14,7 @@ export default {
         fantasy: '#faf4ef',
       },
       fontFamily: {
-        mono: ['Press Start', ...fontFamily.mono],
+        mono: ['"Press Start 2P"', ...fontFamily.mono],
       },
     },
   },

@@ -1,5 +1,6 @@
 <script lang="ts">
   import '../app.css';
+  import '@fontsource/press-start-2p';
   import logo from '$lib/assets/img/logo.svg';
   import Container from '$lib/components/Container.svelte';
 

@@ -2,23 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-display: swap;
-  font-family: 'Press Start';
-  font-style: normal;
-  font-weight: 400;
-  src:
-    url('$lib/assets/fonts/press-start-2p-v15-cyrillic_latin-regular.woff2') format('woff2'),
-    url('$lib/assets/fonts/press-start-2p-v15-cyrillic_latin-regular.ttf') format('truetype');
-}
-
 @layer components {
   .color-olive {
-    @apply text-fantasy bg-olive;
+    @apply bg-olive text-fantasy;
   }
 
   .color-flame {
-    @apply text-fantasy bg-flame;
+    @apply bg-flame text-fantasy;
   }
 
   .color-fantasy {
@@ -38,6 +28,6 @@
   }
 
   .btn {
-    @apply clickable rounded-lg p-3 cursor-pointer;
+    @apply clickable cursor-pointer rounded-lg p-3;
   }
 }
