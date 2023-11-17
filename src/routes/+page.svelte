@@ -1,11 +1,7 @@
 <script lang="ts">
   import Container from '$lib/components/Container.svelte';
 
-  interface TaskBoard {
-    name: string;
-  }
-
-  const taskBoards: TaskBoard[] = [{ name: '1' }, { name: '2' }, { name: '3' }, { name: '4' }];
+  const taskBoards: string[] = ['1', '2', '3', '4'];
 </script>
 
 <svelte:head>
@@ -24,15 +20,15 @@
 </div>
 
 <Container class="grow">
-  <div class="grid grid-cols-1 gap-6 py-6 sm:grid-cols-2 lg:grid-cols-3">
+  <ul class="grid grid-cols-1 gap-6 py-6 sm:grid-cols-2 lg:grid-cols-3">
     {#each taskBoards as taskBoard}
-      <div class="color-sunset rounded-xl p-6">
-        {taskBoard.name}
-      </div>
+      <li class="color-sunset rounded-xl p-6">
+        {taskBoard}
+      </li>
     {/each}
 
     <div>
       <button class="btn color-sunset text-flame">Добавить доску</button>
     </div>
-  </div>
+  </ul>
 </Container>

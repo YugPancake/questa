@@ -3,10 +3,10 @@
   import logo from '$lib/assets/img/logo.svg';
   import Container from '$lib/components/Container.svelte';
 
-  interface NavLink {
+  type NavLink = {
     name: string;
     link: string;
-  }
+  };
 
   const navLinks: NavLink[] = [
     {
