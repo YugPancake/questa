@@ -1,16 +1,45 @@
-<script>
-	import '../app.css';
-	import logo from '$lib/assets/img/logo.svg';
+<script lang="ts">
+  import '../app.css';
+  import logo from '$lib/assets/img/logo.svg';
+
+  interface NavLink {
+    name: string;
+    link: string;
+  }
+
+  const navLinks: NavLink[] = [
+    {
+      name: 'Лавка',
+      link: '/shop',
+    },
+    {
+      name: 'Инвентарь',
+      link: '/inventory',
+    },
+    {
+      name: 'Гильдия',
+      link: '/guild',
+    },
+    {
+      name: 'Календарь',
+      link: '/calendar',
+    },
+  ];
 </script>
 
-<header>
-	<a href="/"><img alt="logo" src={logo} /></a>
-	<nav>
-		<a href="/shop" class="link">Лавка</a>
-		<a href="/inventory" class="link">Инвентарь</a>
-		<a href="/guild" class="link">Гильдия</a>
-		<a href="/calendar" class="link">Календарь</a>
-	</nav>
+<header class="flex items-center justify-between bg-flame px-[10%] py-3">
+  <a href="/"><img alt="logo" src={logo} /></a>
+  <nav class="font-mono text-white">
+    <ul class="flex">
+      {#each navLinks as navLink}
+        <li>
+          <a href={navLink.link} class="block p-4 transition-transform hover:-translate-y-1">
+            {navLink.name}
+          </a>
+        </li>
+      {/each}
+    </ul>
+  </nav>
 </header>
 
 <slot />

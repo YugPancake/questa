@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import line from '$lib/assets/img/line_1.svg';
 </script>
 
@@ -24,7 +24,7 @@
 </body>
 
 <style>
-	@font-face {
+	/* @font-face {
 		font-display: swap;
 		font-family: 'Press Start';
 		font-style: normal;
@@ -105,5 +105,5 @@
 		font-family: Press Start 2P;
 		font-size: 16px;
 		padding-top: 18px;
-	}
+	} */
 </style>
