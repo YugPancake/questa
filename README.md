@@ -27,6 +27,7 @@ npm i
 - Russian - Code Spell Checker
 
 А также установить глобально commitizen:
+
 ```
 npm i -g commitizen
 ```
