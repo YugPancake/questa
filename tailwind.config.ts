@@ -13,9 +13,9 @@ export default {
         olive: '#918450',
         fantasy: '#faf4ef',
       },
-    },
-    fontFamily: {
-      mono: ['Press Start', ...fontFamily.mono],
+      fontFamily: {
+        mono: ['Press Start', ...fontFamily.mono],
+      },
     },
   },
   plugins: [],
