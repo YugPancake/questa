@@ -1,6 +1,7 @@
 <script lang="ts">
   import '../app.css';
   import logo from '$lib/assets/img/logo.svg';
+  import Container from '$lib/components/Container.svelte';
 
   interface NavLink {
     name: string;
@@ -8,6 +9,10 @@
   }
 
   const navLinks: NavLink[] = [
+    {
+      name: 'Главная',
+      link: '/',
+    },
     {
       name: 'Лавка',
       link: '/shop',
@@ -27,19 +32,27 @@
   ];
 </script>
 
-<header class="flex items-center justify-between bg-flame px-[10%] py-3">
-  <a href="/"><img alt="logo" src={logo} /></a>
-  <nav class="font-mono text-white">
-    <ul class="flex">
-      {#each navLinks as navLink}
-        <li>
-          <a href={navLink.link} class="block p-4 transition-transform hover:-translate-y-1">
-            {navLink.name}
-          </a>
-        </li>
-      {/each}
-    </ul>
-  </nav>
-</header>
+<div class="color-fantasy flex h-full min-h-screen flex-col justify-between break-words font-mono">
+  <header class="color-flame">
+    <Container class="flex flex-col items-center justify-between py-3 xl:flex-row">
+      <a href="/" aria-label="Главная" class="clickable block"><img alt="Questa" src={logo} /></a>
+      <nav>
+        <ul class="flex flex-wrap justify-around">
+          {#each navLinks as navLink}
+            <li>
+              <a href={navLink.link} class="clickable block px-4 py-2">
+                {navLink.name}
+              </a>
+            </li>
+          {/each}
+        </ul>
+      </nav>
+    </Container>
+  </header>
 
-<slot />
+  <slot />
+
+  <footer class="color-olive p-4">
+    <p class="flex items-center justify-center">by Qteam</p>
+  </footer>
+</div>
