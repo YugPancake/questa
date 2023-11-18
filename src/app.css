@@ -1,34 +1,33 @@
-@font-face {
-	font-display: swap;
-	font-family: 'Press Start';
-	font-style: normal;
-	font-weight: 400;
-	src: url('$lib/assets/fonts/press-start-2p-v15-cyrillic_latin-regular.woff2') format('woff2'),
-		url('$lib/assets/fonts/press-start-2p-v15-cyrillic_latin-regular.ttf') format('truetype');
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-.link {
-	font-family: Press Start;
-	display: inline-flex;
-	justify-content: center;
-	gap: 53px;
-	padding-top: 33px;
-	padding-left: 51px;
-	font-size: 22px;
-	text-decoration: none;
-	color: #faf4ef;
-}
-img {
-	padding-top: 9px;
-	padding-left: 146px;
-}
+@layer components {
+  .color-olive {
+    @apply bg-olive text-fantasy;
+  }
 
-header {
-	height: 90px;
-	background: #d8572a;
-	width: 100%;
-	position: absolute;
-	top: 0;
-	left: 0;
-	display: flex;
+  .color-flame {
+    @apply bg-flame text-fantasy;
+  }
+
+  .color-fantasy {
+    @apply bg-fantasy text-burgundy;
+  }
+
+  .color-sand {
+    @apply bg-sand text-burgundy;
+  }
+
+  .color-sunset {
+    @apply bg-sunset text-burgundy;
+  }
+
+  .clickable {
+    @apply transition-transform duration-75 hover:-translate-y-1 active:translate-y-0.5 active:scale-x-110 active:scale-y-90;
+  }
+
+  .btn {
+    @apply clickable cursor-pointer rounded-lg p-3;
+  }
 }

@@ -26,6 +26,12 @@ npm i
 - Code Spell Checker
 - Russian - Code Spell Checker
 
+А также установить глобально commitizen:
+
+```
+npm i -g commitizen
+```
+
 ## Разработка
 
 После настройки проекта, запустите сервер в режиме разработки:
