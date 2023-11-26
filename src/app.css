@@ -23,6 +23,10 @@
     @apply bg-sunset text-burgundy;
   }
 
+  .text-color-olive {
+    @apply text-olive;
+  }
+
   .clickable {
     @apply transition-transform duration-75 hover:-translate-y-1 active:translate-y-0.5 active:scale-x-110 active:scale-y-90;
   }

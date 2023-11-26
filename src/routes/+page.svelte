@@ -11,8 +11,7 @@
 <div class="color-sunset">
   <Container class="grid grid-cols-1 gap-6 py-6 lg:grid-cols-3">
     <div class="color-fantasy rounded-xl p-6">
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Corrupti blanditiis optio odit
-      doloremque beatae quas consequuntur perferendis enim pariatur tenetur.
+      <div class="h-[227px] w-[200px] rounded-[15px] border-2 border-stone-500"></div>
     </div>
     <div class="color-fantasy rounded-xl p-6">m2</div>
     <div class="color-fantasy rounded-xl p-6">m3</div>
