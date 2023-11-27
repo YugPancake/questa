@@ -1,3 +1,3 @@
 <svelte:head>
-  <title>Календарь</title>
+  <title>Календарь | Questa</title>
 </svelte:head>

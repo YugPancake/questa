@@ -20,7 +20,7 @@
   }
 
   .color-sunset {
-    @apply bg-sunset text-burgundy shadow-sand;
+    @apply bg-sunset text-burgundy;
   }
 
   .clickable {
