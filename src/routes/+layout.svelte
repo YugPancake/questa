@@ -36,9 +36,9 @@
 <div class="color-fantasy flex h-full min-h-screen flex-col justify-between break-words font-mono">
   <header class="color-flame">
     <Container class="flex flex-col items-center justify-between py-3 xl:flex-row">
-      <a href="/" aria-label="QUESTA" class="clickable block">
+      <div aria-label="QUESTA" class="clickable block">
         {@html logo}
-      </a>
+      </div>
       <nav>
         <ul class="flex flex-wrap justify-around">
           {#each navLinks as navLink}
