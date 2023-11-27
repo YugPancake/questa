@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'Pizel';
+  src:
+    url('$lib/assets/fonts/Pizel.woff2') format('woff2'),
+    url('$lib/assets/fonts/Pizel.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
