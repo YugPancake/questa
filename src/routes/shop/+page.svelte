@@ -8,18 +8,36 @@
 </svelte:head>
 
 <div class="color-sunset">
-  <Container class="grid grid-cols-1 gap-6 py-6 lg:grid-cols-2">
-    <div class="color-fantasy rounded-xl p-6">Торговец</div>
-    <div class="color-fantasy rounded-xl p-6">Персонаж</div>
+  <Container class="flex flex-col gap-6 py-6 lg:flex-row">
+    <div class="color-fantasy grow rounded-xl p-6 lg:h-64">Торговец</div>
+    <div class="color-fantasy rounded-xl p-6 lg:h-64">
+      <img
+        alt="Аватар"
+        src={Quefir}
+        class="aspect-square h-full rounded-xl border-2 border-olive object-cover"
+      />
+    </div>
   </Container>
 </div>
 
-<Container class="grow">
-  <div
-    class="relative top-[12px] ml-auto h-[49px] w-[350px] rounded-[50px] border-2 border-red-900"
-  ></div>
-  <Container class="grid grid-cols-1 gap-6 py-6 lg:grid-cols-2">
-    <div class="relative top-[12px] rounded-[25px] border-2 border-red-900 p-6">Фильтрация</div>
-    <div class="relative top-[12px] rounded-[25px] border-2 border-red-900 p-6">Товары</div>
-  </Container>
+<Container class="flex grow flex-col gap-6 py-6">
+  <form class="flex justify-end">
+    <div class="flex w-full max-w-sm">
+      <input
+        type="search"
+        id="search"
+        class="input rounded-r-none border-r-0"
+        placeholder="Поиск..."
+      />
+      <button type="submit" class="input w-fit rounded-l-none border-l-0">0</button>
+    </div>
+  </form>
+  <div class="flex grow flex-col items-stretch gap-6 md:flex-row">
+    <div class="rounded-xl border-2 border-burgundy p-6">
+      <p>Фильтрация</p>
+    </div>
+    <div class="grow rounded-xl border-2 border-burgundy p-6">
+      <p>Предметы</p>
+    </div>
+  </div>
 </Container>

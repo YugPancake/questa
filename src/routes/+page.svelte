@@ -1,8 +1,86 @@
 <script lang="ts">
   import Container from '$lib/components/Container.svelte';
-  import Quefir from '$lib/assets/img/quefir.png';
-  import heart from '$lib/assets/img/heart.svg';
-  import star from '$lib/assets/img/star.svg';
+  import CharacterSheet from '$lib/components/CharacterSheet.svelte';
+
+  type Task = {
+    title: string;
+    description: string;
+    end?: Date;
+    done?: boolean;
+  };
+
+  type Habit = {
+    title: string;
+    series: number;
+  };
+
+  type Board = {
+    name: string;
+    content: Task[] | Habit[];
+  };
+
+  function isHabit(pet: Habit | Task): pet is Habit {
+    return (pet as Habit).series !== undefined;
+  }
+
+  const habitBoard: Board = {
+    name: 'Привычки',
+    content: [
+      {
+        title: 'Название',
+        series: 0,
+      },
+      {
+        title: 'Название',
+        series: 0,
+      },
+    ],
+  };
+
+  const dailyBoard: Board = {
+    name: 'Задачи на сегодня',
+    content: [
+      {
+        title: 'Название',
+        description: 'Описание описание',
+      },
+      {
+        title: 'Название',
+        description: 'Описание описание',
+      },
+    ],
+  };
+
+  const generalBoard: Board = {
+    name: 'Задачи',
+    content: [
+      {
+        title: 'Название',
+        description: 'Описание описание',
+        end: new Date(),
+      },
+    ],
+  };
+
+  const weeklyBoard: Board = {
+    name: 'Задачи на неделю',
+    content: [
+      {
+        title: 'Название',
+        description: 'Описание описание',
+      },
+      {
+        title: 'Название',
+        description: 'Описание описание',
+      },
+      {
+        title: 'Название',
+        description: 'Описание описание',
+      },
+    ],
+  };
+
+  const boards: Board[] = [habitBoard, dailyBoard, generalBoard, weeklyBoard];
 </script>
 
 <svelte:head>
@@ -10,85 +88,53 @@
 </svelte:head>
 
 <div class="color-sunset">
-  <Container class="grid grid-cols-1 gap-[70px] py-6 lg:grid-cols-3">
-    <div class="color-fantasy rounded-xl p-6">
-      <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <div class="relative h-[227px] w-[212px] rounded-[15px] border-2 border-stone-500">
-          <img alt="Аватар" src={Quefir} class="h-[214px w-[212px]" />
-        </div>
-        <div>
-          <div class="grid grid-cols-4 gap-2 lg:grid-cols-1">
-            <div class="text-[26px]">Кефир</div>
-            <div class="text-base text-orange-600">Почтальон</div>
-            <div class="text-base text-orange-600">56 уровень</div>
-            <div class="grid grid-cols-2 gap-[20px] lg:grid-cols-2">
-              <img alt="Здоровье" src={heart} />
-              <div class="h-10 rounded-[20px] bg-orange-200">
-                <div class="pt-[12px] text-xs font-normal text-red-50">98/100</div>
-              </div>
-              <img alt="Опыт" src={star} />
-              <div class="h-10 rounded-[20px] bg-orange-200">
-                <div class="pt-[12px] text-xs font-normal text-red-50">98/100</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <Container class="grid grid-cols-1 gap-6 py-6 lg:grid-cols-[1.15fr_1fr_0.85fr]">
+    <div class="color-fantasy flex gap-6 rounded-xl p-6 lg:h-64">
+      <CharacterSheet
+        name={'Кефир'}
+        characterClass={'Почтальон'}
+        level={56}
+        healthMax={100}
+        healthValue={90}
+        experienceMax={250}
+        experienceValue={50}
+      />
     </div>
-    <div class="color-fantasy rounded-xl p-6">
-      <div class="text-2xl">Главная задача</div>
+    <div class="color-fantasy rounded-xl p-6 lg:h-64">
+      <p class="text-2xl">Главная задача</p>
     </div>
-    <div class="color-fantasy rounded-xl p-6">
-      <div class="text-2xl">Помодоро таймер</div>
+    <div class="color-fantasy rounded-xl p-6 lg:h-64">
+      <p class="text-2xl">Помодоро таймер</p>
     </div>
   </Container>
 </div>
 
 <Container class="grow">
   <ul class="grid grid-cols-1 gap-6 py-6 sm:grid-cols-2 lg:grid-cols-3">
-    <li class="color-sunset rounded-xl p-6">
-      <div class="flex">
-        <div class="text-[26px]">Привычки</div>
-        <button class="btn color-fantasy ml-auto h-[50px] text-flame">Добавить</button>
-      </div>
-      <div class="color-fantasy mt-[20px] h-20 rounded-[10px]">
-        <div class=" pl-[25px] pt-[20px] text-xl">Название</div>
-        <div class=" pl-[25px] text-xs text-stone-500">серия:0</div>
-      </div>
-    </li>
-    <li class="color-sunset rounded-xl p-6">
-      <div class="flex">
-        <div class="text-[26px]">Задачи на день</div>
-        <button class="btn color-fantasy ml-auto h-[50px] text-flame">Добавить</button>
-      </div>
-      <div class="color-fantasy mt-[20px] h-20 rounded-[10px]">
-        <div class=" pl-[25px] pt-[20px] text-xl">Название</div>
-        <div class=" pl-[25px] text-xs text-stone-500">серия:0</div>
-      </div>
-    </li>
-    <li class="color-sunset rounded-xl p-6">
-      <div class="flex">
-        <div class="text-[26px]">Задачи</div>
-        <button class="btn color-fantasy ml-auto h-[50px] text-flame">Добавить</button>
-      </div>
-      <div class="color-fantasy mt-[20px] h-20 rounded-[10px]">
-        <div class=" pl-[25px] pt-[20px] text-xl">Название</div>
-        <div class=" pl-[25px] text-xs text-stone-500">серия:0</div>
-      </div>
-    </li>
-    <li class="color-sunset rounded-xl p-6">
-      <div class="flex">
-        <div class="text-[26px]">Задачи на неделю</div>
-        <button class="btn color-fantasy ml-auto h-[50px] text-flame">Добавить</button>
-      </div>
-      <div class="color-fantasy mt-[20px] h-20 rounded-[10px]">
-        <div class=" pl-[25px] pt-[20px] text-xl">Название</div>
-        <div class=" pl-[25px] text-xs text-stone-500">серия:0</div>
-      </div>
-    </li>
+    {#each boards as board}
+      <li class="color-sunset rounded-xl p-6">
+        <div class="mb-6 flex items-center justify-between">
+          <p class="text-2xl">{board.name}</p>
+          <button class="btn color-fantasy text-flame">Добавить</button>
+        </div>
+        <ul class="flex flex-col gap-3">
+          {#each board.content as object}
+            <li class="color-fantasy rounded-xl p-6">
+              {#if isHabit(object)}
+                <p class="font-condensed text-2xl">{object.title}</p>
+                <p class="font-condensed text-xl text-olive">серия: {object.series}</p>
+              {:else}
+                <p class="font-condensed text-2xl">{object.title}</p>
+                <p class="font-condensed text-xl text-olive">{object.description}</p>
+              {/if}
+            </li>
+          {/each}
+        </ul>
+      </li>
+    {/each}
 
-    <div>
+    <li>
       <button class="btn color-sunset text-flame">Добавить доску</button>
-    </div>
+    </li>
   </ul>
 </Container>
