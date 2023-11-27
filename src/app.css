@@ -50,4 +50,8 @@
   .btn:active {
     box-shadow: 0 0;
   }
+
+  .input {
+    @apply font-condensed w-full rounded-full border-2 border-burgundy bg-fantasy p-3 text-xl placeholder-flame outline-none focus:border-burgundy focus:outline-dashed focus:outline-burgundy focus:ring-0;
+  }
 }
