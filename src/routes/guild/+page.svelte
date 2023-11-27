@@ -23,6 +23,6 @@
 </div>
 
 <Container class="grow py-[50px] ">
-  <div class="text-color-olive text-4xl font-normal">Название Гильдии</div>
+  <div class="text-4xl font-normal text-stone-500">Название Гильдии</div>
   <div class="text-xl font-normal">45 уровень</div>
 </Container>
