@@ -1,4 +1,5 @@
 import { fontFamily } from 'tailwindcss/defaultTheme';
+import forms from '@tailwindcss/forms';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -15,8 +16,9 @@ export default {
       },
       fontFamily: {
         mono: ['"Press Start 2P"', ...fontFamily.mono],
+        condensed: ['Pizel', ...fontFamily.mono],
       },
     },
   },
-  plugins: [],
+  plugins: [forms()],
 };
