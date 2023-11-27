@@ -1,8 +1,13 @@
 <script lang="ts">
   import '../app.css';
   import '@fontsource/press-start-2p';
+  import type { PageData } from './$types';
   import logo from '$lib/assets/images/logo.svg?raw';
   import Container from '$lib/components/Container.svelte';
+
+  export let data: PageData;
+
+
 
   type NavLink = {
     name: string;
@@ -30,6 +35,21 @@
       name: 'Календарь',
       link: '/calendar',
     },
+    {
+      name: 'ТЕСТОВОЕ',
+      link: '/test',
+    },
+  ];
+
+  const navLinksUnauthorized: NavLink[] = [
+    {
+      name: 'Вход',
+      link: '/login',
+    },
+    {
+      name: 'Регистрация',
+      link: '/signup',
+    },
   ];
 </script>
 
@@ -39,22 +59,36 @@
       <a href="/" aria-label="QUESTA" class="clickable block">
         {@html logo}
       </a>
-      <nav>
-        <ul class="flex flex-wrap justify-around">
-          {#each navLinks as navLink}
-            <li>
-              <a href={navLink.link} class="clickable block px-4 py-2">
-                {navLink.name}
-              </a>
-            </li>
-          {/each}
-        </ul>
-      </nav>
+      {#if !data.session?.user}
+        <nav>
+          <ul class="flex flex-wrap justify-around">
+            {#each navLinksUnauthorized as navLink}
+              <li>
+                <a href={navLink.link} class="clickable block px-4 py-2">
+                  {navLink.name}
+                </a>
+              </li>
+            {/each}
+          </ul>
+        </nav>
+      {:else}
+        <nav>
+          <ul class="flex flex-wrap justify-around">
+            {#each navLinks as navLink}
+              <li>
+                <a href={navLink.link} class="clickable block px-4 py-2">
+                  {navLink.name}
+                </a>
+              </li>
+            {/each}
+          </ul>
+        </nav>
+      {/if}
     </Container>
   </header>
   <slot />
 
-  <footer class="color-olive font-condensed p-4 text-xl">
+  <footer class="color-olive p-4 font-condensed text-xl">
     <p class="flex items-center justify-center">by Qteam</p>
   </footer>
 </div>

@@ -1,6 +1,12 @@
 <script lang="ts">
   import CharacterSheet from '$lib/components/CharacterSheet.svelte';
   import Container from '$lib/components/Container.svelte';
+  import type { PageData } from './$types';
+
+  export let data: PageData;
+
+  const { user } = data;
+
   const guildMates: string[] = [
     '1',
     '2',
@@ -26,7 +32,7 @@
   <Container class="grid grid-cols-1 gap-6 py-6 lg:grid-cols-[1.15fr_1.85fr]">
     <div class="color-fantasy flex gap-6 rounded-xl p-6 lg:h-64">
       <CharacterSheet
-        name={'Кефир'}
+        name={user.name}
         characterClass={'Почтальон'}
         level={56}
         healthMax={100}

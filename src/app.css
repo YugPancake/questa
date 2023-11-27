@@ -30,11 +30,11 @@
   }
 
   .color-sunset {
-    @apply bg-sunset text-burgundy;
+    @apply bg-sunset text-burgundy shadow-sand;
   }
 
   .clickable {
-    @apply rounded-lg outline-burgundy transition-all duration-75 hover:-translate-y-1 focus-visible:-translate-y-1 focus-visible:outline active:translate-y-0.5 active:scale-x-110 active:scale-y-90;
+    @apply rounded-lg outline-burgundy transition-all duration-75 hover:-translate-y-1 focus-visible:-translate-y-1 focus-visible:outline active:translate-y-0.5 active:scale-x-110 active:scale-y-90 inline-block;
   }
 
   .btn {
@@ -52,6 +52,6 @@
   }
 
   .input {
-    @apply font-condensed w-full rounded-full border-2 border-burgundy bg-fantasy p-3 text-xl placeholder-flame outline-none focus:border-burgundy focus:outline-dashed focus:outline-burgundy focus:ring-0;
+    @apply w-full rounded-xl border-2 border-burgundy bg-fantasy p-3 font-condensed text-xl placeholder-flame outline-none focus:border-burgundy focus:outline-dashed focus:outline-burgundy focus:ring-0;
   }
 }

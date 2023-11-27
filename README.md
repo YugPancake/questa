@@ -13,6 +13,14 @@ git clone https://github.com/Teatov/questa
 # установить зависимости
 npm i
 ```
+Инициируйте базу данных
+
+```bash
+npx prisma db push
+npx prisma generate
+```
+
+Так же вызывайте это при каждом изменении схемы БД
 
 ## Настройка IDE
 
@@ -25,6 +33,7 @@ npm i
 - PostCSS Language Support
 - Code Spell Checker
 - Russian - Code Spell Checker
+- Prisma
 
 А также установить глобально commitizen:
 
@@ -41,6 +50,12 @@ npm run dev
 
 # или запустить сервер и сразу открыть страницу в браузере
 npm run dev -- --open
+```
+
+Просмотреть таблицы базы данных можно с помощью
+
+```bash
+npx prisma studio
 ```
 
 ## Сборка

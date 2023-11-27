@@ -15,6 +15,10 @@
   const kaomoji = '(╯°□°）╯︵ ┻━┻';
 </script>
 
+<svelte:head>
+  <title>Ошибка...</title>
+</svelte:head>
+
 <div class="align-center m-auto flex flex-col items-center justify-center p-4">
   <h1 class="text-4xl">{$page.status}</h1>
   <p>{message}</p>

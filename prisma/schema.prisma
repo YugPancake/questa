@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model TestRecord {
+  id      Int    @id @default(autoincrement())
+  title   String
+  content String
+  user    User   @relation(fields: [userId], references: [id])
+  userId  String
+}
+
+model User {
+  id           String       @id @unique
+  name         String
+  email        String       @unique
+  test_records TestRecord[]
+  auth_session Session[]
+  key          Key[]
+}
+
+model Session {
+  id             String @id @unique
+  user_id        String
+  active_expires BigInt
+  idle_expires   BigInt
+  user           User   @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+  @@index([user_id])
+}
+
+model Key {
+  id              String  @id @unique
+  hashed_password String?
+  user_id         String
+  user            User    @relation(references: [id], fields: [user_id], onDelete: Cascade)
+
+  @@index([user_id])
+}

@@ -1,6 +1,11 @@
 <script lang="ts">
   import Container from '$lib/components/Container.svelte';
   import CharacterSheet from '$lib/components/CharacterSheet.svelte';
+  import type { PageData } from './$types';
+
+  export let data: PageData;
+
+  let { user } = data;
 
   type Task = {
     title: string;
@@ -91,7 +96,7 @@
   <Container class="grid grid-cols-1 gap-6 py-6 lg:grid-cols-[1.15fr_1fr_0.85fr]">
     <div class="color-fantasy flex gap-6 rounded-xl p-6 lg:h-64">
       <CharacterSheet
-        name={'Кефир'}
+        name={user.name}
         characterClass={'Почтальон'}
         level={56}
         healthMax={100}
