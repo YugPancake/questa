@@ -1,5 +1,6 @@
 <script lang="ts">
   import Container from '$lib/components/Container.svelte';
+  import Quefir from '$lib/assets/images/quefir.png';
 </script>
 
 <svelte:head>

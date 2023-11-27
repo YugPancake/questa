@@ -1,7 +1,7 @@
 <script lang="ts">
   import '../app.css';
   import '@fontsource/press-start-2p';
-  import logo from '$lib/assets/img/logo.svg?raw';
+  import logo from '$lib/assets/images/logo.svg?raw';
   import Container from '$lib/components/Container.svelte';
 
   type NavLink = {
