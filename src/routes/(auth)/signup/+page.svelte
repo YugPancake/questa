@@ -20,6 +20,7 @@
   <title>Регистрация</title>
 </svelte:head>
 
+<div class="text-center text-4xl">Регистрация</div>
 <Container class="flex justify-center gap-6">
   <form method="POST" class="w-96" use:enhance>
     <TextInput

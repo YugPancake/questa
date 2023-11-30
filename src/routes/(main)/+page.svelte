@@ -100,7 +100,7 @@
         characterClass={'Почтальон'}
         level={56}
         healthMax={100}
-        healthValue={90}
+        healthValue={12}
         experienceMax={250}
         experienceValue={50}
       />
