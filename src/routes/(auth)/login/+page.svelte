@@ -20,13 +20,13 @@
 </svelte:head>
 
 <div class="grow bg-sunset">
-  <Container class=" my-16 flex max-w-lg justify-center rounded-xl bg-fantasy py-16">
+  <Container class=" my-16 flex max-w-lg justify-center rounded-2xl bg-fantasy py-16">
     <div>
       <div class="mb-8 text-center text-3xl">Вход</div>
       <form method="POST" class="w-96 space-y-8" use:enhance>
         <EmailInput
           name="email"
-          label="Почта"
+          label="E-mail"
           bind:value={$form.email}
           errors={$errors.email}
           constraints={$constraints.email}
