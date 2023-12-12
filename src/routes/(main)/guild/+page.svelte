@@ -31,15 +31,7 @@
 <div class="color-sunset">
   <Container class="grid grid-cols-1 gap-6 py-6 lg:grid-cols-[1.15fr_1.85fr]">
     <div class="color-fantasy flex gap-6 rounded-xl p-6 lg:h-64">
-      <CharacterSheet
-        name={user.name}
-        characterClass={'Почтальон'}
-        level={56}
-        healthMax={100}
-        healthValue={90}
-        experienceMax={250}
-        experienceValue={50}
-      />
+      <CharacterSheet {user} />
     </div>
     <div class="h-64 overflow-y-auto">
       <ul class="flex flex-wrap items-center justify-center gap-6">

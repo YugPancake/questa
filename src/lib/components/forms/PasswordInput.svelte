@@ -19,5 +19,5 @@
     aria-invalid={errors ? 'true' : undefined}
     {...$$restProps}
   />
-  {#if errors}<span class="font-condensed text-flame">{errors.join('; ')}</span>{/if}
+  <div class="font-condensed text-flame min-h-[1.5rem]">{#if errors}{errors.join('; ')}{/if}</div>
 </label>

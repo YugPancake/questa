@@ -1,17 +1,40 @@
 <script lang="ts">
   import Container from '$lib/components/Container.svelte';
+  import { VisXYContainer, VisLine, VisAxis } from '@unovis/svelte';
+  import { levelToExperience, experienceToLevel, getLevelProgress } from '$lib/utils/stats';
   import type { PageData } from './$types';
 
   export let data: PageData;
 
   $: ({ testRecords } = data);
+
+  type DataRecord = { x: number; y: number };
+  const totalExperienceChart: DataRecord[] = [];
+  const experienceMarginChart: DataRecord[] = [];
+  for (let i = 0; i < 50; i++) {
+    totalExperienceChart.push({ x: i, y: levelToExperience(i) });
+    experienceMarginChart.push({ x: i, y: getLevelProgress(levelToExperience(i)).needed });
+  }
 </script>
 
 <svelte:head>
   <title>Тестовая страница</title>
 </svelte:head>
 
-<Container class="flex justify-center gap-6">
+<Container class="flex flex-col items-center justify-center gap-6">
+  <h3>Общее количество опыта на уровень / Разница в опыте с предыдущим уровнем</h3>
+  <div class="flex w-full justify-stretch">
+    <VisXYContainer>
+      <VisLine data={totalExperienceChart} x={(d) => d.x} y={(d) => d.y} showLabels={true} />
+      <VisAxis type="x" label="Уровень" />
+      <VisAxis type="y" label="Общее количество опыта" />
+    </VisXYContainer>
+    <VisXYContainer>
+      <VisLine data={experienceMarginChart} x={(d) => d.x} y={(d) => d.y} showLabels={true} />
+      <VisAxis type="x" label="Уровень" />
+      <VisAxis type="y" label="Разница в опыте с предыдущим" />
+    </VisXYContainer>
+  </div>
   <form action="?/createTestRecord" method="post" class="w-96">
     <h3>Новая запись</h3>
     <label for="title">

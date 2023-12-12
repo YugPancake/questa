@@ -4,7 +4,7 @@ const customErrorMap: z.ZodErrorMap = (error, ctx) => {
   let message = ctx.defaultError;
   switch (error.code) {
     case z.ZodIssueCode.too_small:
-      message = `Слишком короткое`;
+      message = `Поле должно быть заполнено`;
       break;
     case z.ZodIssueCode.too_big:
       message = `Слишком длинное`;
@@ -30,6 +30,11 @@ export const signupSchema = z.object({
   name: z.string().trim().min(1).max(255),
   email: z.string().trim().min(1).max(255).toLowerCase().email(),
   password: z.string().trim().min(1).max(255),
+});
+
+export const createCharacterSchema = z.object({
+  characterClass: z.number().int().nonnegative().default(-1),
+  avatar: z.number().int().nonnegative().default(-1),
 });
 
 export const testRecordSchema = z.object({

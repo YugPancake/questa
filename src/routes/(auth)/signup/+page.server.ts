@@ -37,7 +37,7 @@ export const actions: Actions = {
 
       if (err instanceof Prisma.PrismaClientKnownRequestError) {
         if (err.code === 'P2002') {
-          message = 'Пользователь с такой почтой уже существует';
+          message = 'Эта почта уже занята';
         }
       }
 

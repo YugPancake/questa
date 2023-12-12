@@ -2,16 +2,11 @@ import type { Actions, PageServerLoad } from './$types';
 import prisma from '$lib/server/prisma';
 import { error, fail, redirect } from '@sveltejs/kit';
 
-export const load: PageServerLoad = async ({ locals, parent }) => {
-  await parent();
-
-  const session = await locals.auth.validate();
-  if (!session) {
-    throw redirect(302, '/login');
-  }
+export const load: PageServerLoad = async ({ parent }) => {
+  const data = await parent();
 
   return {
-    testRecords: await prisma.testRecord.findMany({ where: { userId: session.user.userId } }),
+    testRecords: await prisma.testRecord.findMany({ where: { userId: data.user.id } }),
   };
 };
 

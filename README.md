@@ -16,8 +16,7 @@ npm i
 Инициируйте базу данных
 
 ```bash
-npx prisma db push
-npx prisma generate
+npx prisma migrate dev
 ```
 
 Так же вызывайте это при каждом изменении схемы БД

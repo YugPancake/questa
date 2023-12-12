@@ -3,11 +3,12 @@
   import '@fontsource/press-start-2p';
   import type { PageData } from './$types';
   import logo from '$lib/assets/images/logo.svg?raw';
+  import bell from '$lib/assets/icons/bell.svg?raw';
+  import coin from '$lib/assets/icons/coin.svg?raw';
+  import user from '$lib/assets/icons/user.svg?raw';
   import Container from '$lib/components/Container.svelte';
 
   export let data: PageData;
-
-
 
   type NavLink = {
     name: string;
@@ -83,12 +84,25 @@
             {/each}
           </ul>
         </nav>
+        <div class="flex items-center justify-around text-fantasy">
+          <a href="/" aria-label="Монеты" class="clickable flex items-center gap-2 p-2">
+            <span>{@html coin}</span>999
+          </a>
+          <a href="/" aria-label="Уведомления" class="clickable block p-2">
+            {@html bell}
+          </a>
+          <a href="/" aria-label="Профиль" class="clickable block p-2">
+            {@html user}
+          </a>
+        </div>
       {/if}
     </Container>
   </header>
   <slot />
 
   <footer class="color-olive p-4 font-condensed text-xl">
-    <p class="flex items-center justify-center">by Qteam</p>
+    <p class="flex items-center justify-center">
+      <a href="/about" class="clickable">by Qteam</a>
+    </p>
   </footer>
 </div>

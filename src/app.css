@@ -34,7 +34,7 @@
   }
 
   .clickable {
-    @apply rounded-lg outline-burgundy transition-all duration-75 hover:-translate-y-1 focus-visible:-translate-y-1 focus-visible:outline active:translate-y-0.5 active:scale-x-110 active:scale-y-90 inline-block;
+    @apply rounded-lg outline-burgundy transition-all duration-75 hover:-translate-y-1 focus-visible:-translate-y-1 focus-visible:outline active:translate-y-0.5 active:scale-x-110 active:scale-y-90 flex items-center justify-center gap-2;
   }
 
   .btn {

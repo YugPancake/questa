@@ -1,6 +1,11 @@
 <script lang="ts">
   import Container from '$lib/components/Container.svelte';
-  import Quefir from '$lib/assets/images/quefir.png';
+  import search from '$lib/assets/icons/search.svg?raw';
+  import type { PageData } from './$types';
+
+  export let data: PageData;
+
+  let { user } = data;
 </script>
 
 <svelte:head>
@@ -12,8 +17,8 @@
     <div class="color-fantasy grow rounded-xl p-6 lg:h-64">Торговец</div>
     <div class="color-fantasy rounded-xl p-6 lg:h-64">
       <img
-        alt="Аватар"
-        src={Quefir}
+        alt={user.stats?.avatar.alt}
+        src="/avatars/{user.stats?.avatar.fileName}"
         class="aspect-square h-full rounded-xl border-2 border-olive object-cover"
       />
     </div>
@@ -29,7 +34,13 @@
         class="input rounded-r-none border-r-0"
         placeholder="Поиск..."
       />
-      <button type="submit" class="input w-fit rounded-l-none border-l-0">0</button>
+      <dir
+        class="input my-0 flex w-fit items-center justify-center rounded-l-none border-l-0 p-0 text-flame"
+      >
+        <button type="submit" class="clickable p-3">
+          {@html search}
+        </button>
+      </dir>
     </div>
   </form>
   <div class="flex grow flex-col items-stretch gap-6 md:flex-row">
