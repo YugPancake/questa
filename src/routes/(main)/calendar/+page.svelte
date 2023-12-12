@@ -27,7 +27,7 @@
       theme.weekdays[6] = 'ec-sat !bg-sunset';
       theme.today = 'ec-today !bg-sand';
       theme.otherMonth = '!text-flame/50';
-      theme.event = 'ec-event sm:!p-2 rounded-xl !bg-flame font-condensed';
+      theme.event = 'ec-event sm:!p-2 !shadow-none !rounded-xl !bg-flame font-condensed';
       theme.title = 'ec-title text-xl';
       return theme;
     },
