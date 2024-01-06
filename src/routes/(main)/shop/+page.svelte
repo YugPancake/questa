@@ -14,7 +14,13 @@
 
 <div class="color-sunset">
   <Container class="flex flex-col gap-6 py-6 lg:flex-row">
-    <div class="color-fantasy grow rounded-xl p-6 lg:h-64">Торговец</div>
+    <div class="color-fantasy rounded-xl flex items-center justify-center  mr-28">
+      <img src="src\lib\assets\images\shop_owner.png" alt="Торговец" class="h-60">
+      <div class="w-36 h-36 rounded-xl border-4 border-olive object-cover ml-9 mr-9" ></div>
+      <div class="w-36 h-36 rounded-xl border-4 border-olive object-cover ml-9 mr-9" ></div>
+      <div class="w-36 h-36 rounded-xl border-4 border-olive object-cover ml-9 mr-20" ></div>
+    </div>
+    
     <div class="color-fantasy rounded-xl p-6 lg:h-64">
       <img
         alt={user.stats?.avatar.alt}
