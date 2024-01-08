@@ -1,4 +1,21 @@
 {
-  "cSpell.words": ["Questa"],
-  "editor.unicodeHighlight.includeStrings": false
+  "cSpell.words": [
+    "Questa"
+  ],
+  "editor.unicodeHighlight.includeStrings": false,
+  "latex-workshop.latex.tools": [
+    {
+      "name": "latexmk",
+      "command": "latexmk",
+      "args": [
+        "-xelatex",
+        "-synctex=1",
+        "-interaction=nonstopmode",
+        "-file-line-error",
+        "-shell-escape",
+        "%DOC%"
+      ],
+      "env": {}
+    }
+  ]
 }

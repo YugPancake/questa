@@ -1,0 +1,76 @@
+\documentclass{fefu}
+\usepackage{subfiles}
+
+\usepackage{float}
+\usepackage{minted}
+\usepackage{dirtree}
+\usepackage{multirow}
+
+\renewcommand{\listingscaption}{Код программы}
+
+\author{Титов Анатолий Александрович}
+\title{ЗАГОЛОВОК}
+\setfaculty{09.03.03 Прикладная информатика}
+\setprogram{Прикладная информатика в компьютерном дизайне}
+\setgroup{Б9122-09.03.03пикд}
+\setsupervisor{Фамилия Имя Отчество}{доцент}
+\setdirector{Фамилия Имя Отчество}{}
+\setsecretary{Фамилия Имя Отчество}{}
+
+\addbibresource{references.bib}
+
+\newcommand{\macro}[2]{\texttt{\textbackslash#1\{#2\}}}
+
+\newfontfamily\cyrillicfont[Ligatures=TeX]{Times New Roman}
+
+\newif\ifpractice
+\practicetrue
+
+\begin{document}
+\ifpractice
+    \maketitle{practice}
+    \tableofcontents
+    \section*{Аннотация}
+    \subfile{subfiles/0-annotation.tex}
+    \newpage
+    \section{Введение}
+    \subfile{subfiles/1-introduction.tex}
+    \newpage
+    \section{Требования к окружению}
+    \subfile{subfiles/2-environment.tex}
+    \newpage
+    \section{Архитектура системы (Общие требования)}
+    \subfile{subfiles/3-architecture.tex}
+    \newpage
+    \section{Спецификация данных}
+    \subfile{subfiles/4-data.tex}
+    \newpage
+    \section{Функциональные требования}
+    \subfile{subfiles/5-function.tex}
+    \newpage
+    \section{Требования к интерфейсу}
+    \subfile{subfiles/6-interface.tex}
+    \newpage
+    \section{Прочие требования}
+    \subfile{subfiles/7-requirements.tex}
+    \newpage
+    \section{Проект}
+    \subfile{subfiles/8-project.tex}
+    \newpage
+    \section{Реализация и тестирование}
+    \subfile{subfiles/9-realisation.tex}
+    \newpage
+    \section*{Заключение}
+    \subfile{subfiles/10-conclusion.tex}
+    \newpage
+    \section*{Список литературы}
+    \subfile{subfiles/11-literature.tex}
+    \newpage
+    \printbibliography
+    \subfile{subfiles/diary.tex}
+    \subfile{subfiles/practice-task.tex}
+\else
+    \maketitle{thesis}
+    \makethesistitlebackside
+\fi
+\end{document}
