@@ -20,7 +20,6 @@
     '10',
     '11',
     '12',
-    '13',
   ];
 </script>
 
@@ -45,7 +44,25 @@
   </Container>
 </div>
 
-<Container class="grow py-[50px] ">
-  <p class="text-4xl text-olive">Название Гильдии</p>
-  <p class="text-xl">45 уровень</p>
+<Container class="grow py-12 grid grid-cols-2 gap-32 lg:grid-cols-[1.35fr_0.65fr]">
+  <div>
+    <p class="text-4xl text-olive">Название Гильдии</p>
+    <p class="text-xl pb-7">45 уровень</p>
+    <div class="h-auto bg-sunset rounded-2xl py-11 px-16">
+      <p class=" text-2xl pb-10">Недельный Босс: Имя Босса</p>
+      <div class="grid grid-cols-2 gap-9">
+        <div class="bg-fantasy h-[600px] rounded-2xl "></div>
+        <div class="">
+          <p class="text-flame text-xl pb-5  text-center">Лог сражения:</p>
+          <div class="bg-fantasy rounded-2xl h-[552px]"></div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="bg-sunset rounded-2xl h-auto p-10 grid lg:grid-rows-[1.8fr_0.2fr]">
+  <div class="bg-fantasy rounded-2xl h-full"></div>
+  <div class="bg-fantasy rounded-2xl h-20 mt-6"></div>
+</div>
+  
 </Container>
