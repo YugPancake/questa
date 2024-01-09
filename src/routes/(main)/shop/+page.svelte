@@ -54,7 +54,9 @@
       <p>Фильтрация</p>
     </div>
     <div class="grow rounded-xl border-2 border-burgundy p-6">
-      <p>Предметы</p>
+      <div class="px-8 grid grid-cols-5 grid-rows-3">
+        <div class="w-36 h-36 rounded-xl border-4 border-olive object-cover mx-8 my-12" ></div>
+      </div>
     </div>
   </div>
 </Container>
