@@ -34,7 +34,19 @@
   }
 
   .clickable {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg outline-burgundy transition-all duration-75 hover:-translate-y-1 focus-visible:-translate-y-1 focus-visible:outline active:translate-y-0.5 active:scale-x-110 active:scale-y-90;
+    @apply inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg outline-burgundy transition-all duration-75;
+  }
+
+  .clickable[disabled] {
+    @apply text-burgundy/50;
+  }
+
+  .clickable:not([disabled]) {
+    @apply hover:-translate-y-1 focus-visible:-translate-y-1 focus-visible:outline active:translate-y-0.5 active:scale-x-110 active:scale-y-90;
+  }
+
+  .clickable[disabled] {
+    @apply cursor-not-allowed border-dashed;
   }
 
   .btn {
@@ -42,16 +54,20 @@
     box-shadow: 0 0;
   }
 
-  .btn:hover,
-  .btn:focus-visible {
+  .btn:hover:not([disabled]),
+  .btn:focus-visible:not([disabled]) {
     box-shadow: 0 0.25rem;
   }
 
-  .btn:active {
+  .btn:active:not([disabled]) {
     box-shadow: 0 0;
   }
 
   .input {
-    @apply w-full rounded-xl border-2 border-burgundy bg-fantasy p-3 font-condensed text-xl placeholder-flame outline-none focus:border-burgundy focus:outline-dashed focus:outline-burgundy focus:ring-0;
+    @apply w-full rounded-xl border-2 border-burgundy bg-fantasy p-3 font-condensed text-xl placeholder-flame outline-none focus:ring-0 focus-visible:border-burgundy focus-visible:outline-dashed focus-visible:outline-burgundy;
+  }
+
+  .input[disabled] {
+    @apply cursor-not-allowed border-dashed border-burgundy/50 text-burgundy/50;
   }
 }

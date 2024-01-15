@@ -4,7 +4,7 @@ import prisma from '$lib/server/prisma';
 
 export const load: LayoutServerLoad = async ({ locals, url }) => {
   const session = await locals.auth.validate();
-  if (!session) throw redirect(302, '/login');
+  if (!session) throw redirect(302, '/signup');
 
   const user = (await prisma.user.findUnique({
     where: { id: session.user.userId },

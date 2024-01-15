@@ -10,7 +10,7 @@
 
   export let data: PageData;
 
-  const { user } = data;
+  const { user, tasks } = data;
 
   let options = {
     view: 'dayGridMonth',
@@ -31,10 +31,9 @@
       theme.title = 'ec-title text-xl';
       return theme;
     },
-    events: [
-      { start: '2023-12-01', end: '2023-12-02', title: 'event', allDay: true },
-      { start: '2023-12-03', end: '2023-12-04', title: 'event', allDay: true },
-    ],
+    events: tasks.map((task: any) => {
+      return { ...task, allDay: true };
+    }),
   };
 </script>
 

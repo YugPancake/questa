@@ -1,23 +1,30 @@
-<script lang="ts">
-  import type { InputConstraint } from 'sveltekit-superforms';
-
-  export let value: string;
-  export let name: string;
-  export let label: string | undefined = undefined;
-  export let errors: string[] | undefined = undefined;
-  export let constraints: InputConstraint | undefined = undefined;
+<script lang="ts" context="module">
+  import type { AnyZodObject } from 'zod';
+  type T = AnyZodObject;
 </script>
 
-<label class="label block" for={name}>
+<script lang="ts" generics="T extends AnyZodObject">
+  import type { z } from 'zod';
+  import type { ZodValidation, FormPathLeaves } from 'sveltekit-superforms';
+  import { formFieldProxy, type SuperForm } from 'sveltekit-superforms/client';
+
+  export let form: SuperForm<ZodValidation<T>, unknown>;
+  export let field: FormPathLeaves<z.infer<T>>;
+  export let label: String;
+
+  const { value, errors } = formFieldProxy(form, field);
+</script>
+
+<label class="label block" for={field}>
   {#if label}<span class="block">{label}</span>{/if}
   <input
     class="input"
     type="email"
-    {name}
-    id={name}
-    bind:value
-    aria-invalid={errors ? 'true' : undefined}
+    name={field}
+    id={field}
+    bind:value={$value}
+    aria-invalid={$errors ? 'true' : undefined}
     {...$$restProps}
   />
-  <div class="font-condensed text-flame min-h-[1.5rem]">{#if errors}{errors.join('; ')}{/if}</div>
+  <div class="font-condensed text-flame min-h-[1.5rem]">{#if $errors}{$errors?.join('; ')}{/if}</div>
 </label>

@@ -8,39 +8,29 @@
 
   export let data: PageData;
 
-  const { form, errors, constraints, enhance, delayed } = superForm(data.form, {
+  const form = superForm(data.form, {
     validators: loginSchema,
     validationMethod: 'onblur',
     taintedMessage: null,
   });
+
+  const { errors, delayed, enhance } = form;
 </script>
 
 <svelte:head>
   <title>Вход</title>
 </svelte:head>
 
-<div class="flex grow items-center justify-center bg-sunset">
-  <div class="color-fantasy my-16 flex max-w-lg flex-col items-center space-y-8 rounded-2xl p-12">
+<div class="flex grow items-center justify-center bg-sunset py-6">
+  <div class="color-fantasy flex w-full max-w-lg flex-col items-center space-y-8 rounded-2xl p-12">
     <div class="text-center text-3xl">Вход</div>
-    <form method="POST" class="w-96 space-y-2" use:enhance>
-      <EmailInput
-        name="email"
-        label="E-mail"
-        bind:value={$form.email}
-        errors={$errors.email}
-        constraints={$constraints.email}
-      />
-      <PasswordInput
-        name="password"
-        label="Пароль"
-        bind:value={$form.password}
-        errors={$errors.password}
-        constraints={$constraints.password}
-      />
+    <form method="POST" class="w-full space-y-2 lg:w-96" use:enhance>
+      <EmailInput field="email" label="E-mail" {form} />
+      <PasswordInput field="password" label="Пароль" {form} />
       <div class="min-h-[1.5rem] font-condensed text-flame">
         {#if $errors?._errors}{$errors?._errors.join('; ')}{/if}
       </div>
-      <button class="btn color-olive h-16 w-96" type="submit">
+      <button class="btn color-olive h-16 w-full" type="submit">
         Войти{#if $delayed}<Spinner />{/if}
       </button>
       <p class="text-center font-condensed text-lg">

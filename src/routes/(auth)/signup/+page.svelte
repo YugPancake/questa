@@ -1,6 +1,5 @@
 <script lang="ts">
   import type { PageData } from './$types';
-  import Container from '$lib/components/Container.svelte';
   import { superForm } from 'sveltekit-superforms/client';
   import EmailInput from '$lib/components/forms/EmailInput.svelte';
   import PasswordInput from '$lib/components/forms/PasswordInput.svelte';
@@ -10,53 +9,67 @@
 
   export let data: PageData;
 
-  const { form, errors, constraints, enhance, delayed } = superForm(data.form, {
+  const form = superForm(data.form, {
     validators: signupSchema,
     validationMethod: 'onblur',
     taintedMessage: null,
   });
+
+  const { errors, delayed, enhance } = form;
 </script>
 
 <svelte:head>
   <title>Регистрация</title>
 </svelte:head>
 
-<div class="flex grow items-center justify-center bg-sunset">
-  <div
-    class="color-fantasy my-16 flex max-w-lg flex-col items-center space-y-8 rounded-2xl p-12"
-  >
-    <div class="text-center text-3xl">Регистрация</div>
-    <form method="POST" class="w-96 space-y-2" use:enhance>
-      <TextInput
-        name="name"
-        label="Имя"
-        bind:value={$form.name}
-        errors={$errors.name}
-        constraints={$constraints.name}
-      />
-      <EmailInput
-        name="email"
-        label="E-mail"
-        bind:value={$form.email}
-        errors={$errors.email}
-        constraints={$constraints.email}
-      />
-      <PasswordInput
-        name="password"
-        label="Пароль"
-        bind:value={$form.password}
-        errors={$errors.password}
-        constraints={$constraints.password}
-      />
+<div
+  class="flex grow flex-col items-center justify-center gap-4 bg-sunset py-6 lg:flex-row lg:gap-12 lg:py-12"
+>
+  <div class="color-fantasy flex w-full max-w-lg flex-col items-center space-y-8 rounded-2xl p-12">
+    <div class="text-center text-3xl">Создать аккаунт</div>
+    <form method="POST" class="w-full space-y-2" use:enhance>
+      <TextInput field="name" label="Имя" {form} />
+      <EmailInput field="email" label="E-mail" {form} />
+      <PasswordInput field="password" label="Пароль" {form} />
       <div class="min-h-[1.5rem] font-condensed text-flame">
         {#if $errors?._errors}{$errors?._errors.join('; ')}{/if}
       </div>
-      <button class="btn color-olive h-16 w-96" type="submit">
-        Зарегистрироваться{#if $delayed}<Spinner />{/if}
+      <button class="btn color-olive h-16 w-full" type="submit">
+        Начать{#if $delayed}<Spinner />{/if}
       </button>
       <p class="text-center font-condensed text-lg">
         Уже зарегистрированы? <a href="/login" class="clickable text-flame">Войти</a>
       </p>
     </form>
   </div>
+  <div class="flex max-w-lg flex-col items-center">
+    <div class="flex flex-col items-center px-6">
+      <div
+        class="speech-bubble rounded-2xl bg-fantasy p-4 text-center text-xl text-flame lg:p-12 lg:text-4xl"
+      >
+        Добро пожаловать в QUESTA!
+      </div>
+    </div>
+    <img src="src\lib\assets\images\quefir.png" alt="" class="max-h-48 lg:max-h-96" />
+  </div>
 </div>
+
+<style>
+  .speech-bubble {
+    position: relative;
+  }
+
+  .speech-bubble:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border: 20px solid transparent;
+    border-top-color: rgb(250 244 239);
+    border-bottom: 0;
+    margin-left: -20px;
+    margin-bottom: -20px;
+  }
+</style>

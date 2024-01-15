@@ -27,13 +27,22 @@ async function main() {
 
     await prisma.avatar.upsert({
       where: { fileName: avatar.fileName },
+      update: avatar,
+      create: avatar,
+    });
+  }
+
+  const priorities = ['Низкий', 'Средний', 'Высокий'];
+  for (let i = 0; i < priorities.length; i++) {
+    const priority = priorities[i];
+
+    await prisma.priorityLevel.upsert({
+      where: { name: priority },
       update: {
-        fileName: avatar.fileName,
-        alt: avatar.alt,
+        name: priority,
       },
       create: {
-        fileName: avatar.fileName,
-        alt: avatar.alt,
+        name: priority,
       },
     });
   }

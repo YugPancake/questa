@@ -41,3 +41,21 @@ export const testRecordSchema = z.object({
   title: z.string().trim().min(1).max(255),
   content: z.string().trim().min(1).max(255),
 });
+
+export const taskSchema = z.object({
+  id: z.string().optional(),
+  title: z.string().trim().min(1),
+  description: z.string().nullable().optional(),
+  start: z.string().optional(),
+  end: z.string().optional(),
+  durationEnabled: z.boolean().optional(),
+  // priorityLevelId: z.number().int().optional(),
+  // categoryId: z.number().int().optional(),
+  boardId: z.string(),
+});
+
+export const boardSchema = z.object({
+  id: z.string().optional(),
+  name: z.string().trim().min(1),
+  // userId: z.string(),
+});

@@ -7,7 +7,7 @@
 
   export let data: PageData;
 
-  const { form, errors, constraints, enhance, delayed } = superForm(data.form, {
+  const { form, errors, enhance, delayed } = superForm(data.form, {
     validators: createCharacterSchema,
     validationMethod: 'onblur',
     taintedMessage: null,
