@@ -6,6 +6,7 @@
   import TextInput from '$lib/components/forms/TextInput.svelte';
   import { signupSchema } from '$lib/zod/schema';
   import Spinner from '$lib/components/Spinner.svelte';
+  import QuefirImg from '$lib/assets/images/quefir.png'
 
   export let data: PageData;
 
@@ -50,7 +51,7 @@
         Добро пожаловать в QUESTA!
       </div>
     </div>
-    <img src="src\lib\assets\images\quefir.png" alt="" class="max-h-48 lg:max-h-96" />
+    <img src={QuefirImg} alt="" class="max-h-48 lg:max-h-96 w-auto" width="555" height="561" />
   </div>
 </div>
 

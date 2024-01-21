@@ -43,8 +43,12 @@ model UserStats {
   class   CharacterClass @relation(fields: [classId], references: [id])
   classId Int
 
-  avatar   Avatar @relation(fields: [avatarId], references: [id])
-  avatarId Int
+  avatarBody     AvatarLayer @relation(name: "body", fields: [avatarBodyId], references: [id])
+  avatarBodyId   Int
+  avatarEyes     AvatarLayer @relation(name: "eyes", fields: [avatarEyesId], references: [id])
+  avatarEyesId   Int
+  avatarOutfit   AvatarLayer @relation(name: "outfit", fields: [avatarOutfitId], references: [id])
+  avatarOutfitId Int
 }
 
 model CharacterClass {
@@ -55,13 +59,15 @@ model CharacterClass {
   userStats UserStats[]
 }
 
-model Avatar {
+model AvatarLayer {
   id Int @id @default(autoincrement())
 
-  fileName String @unique
-  alt      String
+  fileName  String      @unique
+  type      Int
 
-  userStats UserStats[]
+  userStatsBody UserStats[] @relation(name: "body")
+  userStatsEyes UserStats[] @relation(name: "eyes")
+  userStatsOutfit UserStats[] @relation(name: "outfit")
 }
 
 model Task {
@@ -71,8 +77,8 @@ model Task {
   description String?
 
   durationEnabled Boolean   @default(false)
-  start           DateTime?
-  end             DateTime?
+  start           DateTime? @default(now())
+  end             DateTime? @default(now())
 
   done Boolean @default(false)
 
@@ -91,6 +97,7 @@ model PriorityLevel {
 
   name  String @unique
   tasks Task[]
+  level Int
 }
 
 model TaskCategory {

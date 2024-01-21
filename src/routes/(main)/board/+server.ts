@@ -7,9 +7,10 @@ export const POST: RequestHandler = async ({ locals }) => {
   if (!session) return fail(401);
 
   try {
+    const now = new Date();
     const board = await prisma.taskBoard.create({
       data: {
-        name: 'Доска',
+        name: `Доска ${now.toLocaleDateString('ru-RU')} ${now.toLocaleTimeString('ru-RU')}`,
         user: {
           connect: {
             id: session.user.userId,

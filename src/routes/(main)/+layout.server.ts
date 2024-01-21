@@ -8,11 +8,12 @@ export const load: LayoutServerLoad = async ({ locals, url }) => {
 
   const user = (await prisma.user.findUnique({
     where: { id: session.user.userId },
-    include: { stats: { include: { class: true, avatar: true } } },
+    include: {
+      stats: { include: { class: true, avatarBody: true, avatarEyes: true, avatarOutfit: true } },
+    },
   }))!;
 
-  if (!user.stats && !url.href.includes('creation'))
-    throw redirect(302, '/creation');
+  if (!user.stats && !url.href.includes('creation')) throw redirect(302, '/creation');
 
   return {
     sesstionUser: session.user,

@@ -14,8 +14,8 @@
 
   export let data: PageData;
 
-  let { user } = data;
-  $: ({ boards } = data);
+  let { priorityLevels } = data;
+  $: ({ boards, user } = data);
 
   $: editingTask = false;
   $: editingBoard = false;
@@ -40,6 +40,8 @@
 
   $: durationEnabled = taskForm.fields.durationEnabled.value;
   $: loadingId = '';
+
+  const priorityLevelColors = ['bg-olive', 'bg-sand', 'bg-flame'];
 
   const openBoard = (board: any) => {
     editingBoard = true;
@@ -118,6 +120,9 @@
         'content-type': 'application/json',
       },
     });
+
+    loadingId = '';
+    await invalidateAll();
   };
 
   const createTask = async (event: any) => {
@@ -166,9 +171,9 @@
   <ul class="grid grid-cols-1 gap-6 py-6 sm:grid-cols-2 lg:grid-cols-3">
     {#each boards as board}
       <li class="color-sunset rounded-xl p-6">
-        <div class="mb-6 flex items-center justify-between">
+        <div class="mb-3 flex items-start justify-between">
           <button
-            class="clickable text-2xl"
+            class="clickable block h-full w-full text-left text-2xl"
             id={board.id}
             on:click={(event) => {
               loadingId = board.id + 'a';
@@ -178,39 +183,81 @@
             {board.name}{#if loadingId === board.id + 'a'}<Spinner />{/if}
           </button>
           <button
-            class="btn color-fantasy aspect-square text-flame"
+            class="btn color-fantasy text-flame"
             id={board.id}
             on:click={(event) => {
               loadingId = board.id;
               createTask(event);
             }}
-            >+{#if loadingId === board.id}<Spinner />{/if}</button
+            >{#if loadingId === board.id}<Spinner />{:else}<svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="icon icon-tabler icon-tabler-plus"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-width="3"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                id={board.id}
+                ><path stroke="none" d="M0 0h24v24H0z" fill="none" /><path d="M12 5l0 14" /><path
+                  d="M5 12l14 0"
+                /></svg
+              >{/if}</button
           >
         </div>
         <ul class="flex flex-col gap-3">
           {#each board.tasks as task}
-            <li class="color-fantasy flex items-center gap-4 rounded-xl p-6">
+            <li class="color-fantasy flex gap-4 rounded-xl p-4">
               <input
                 type="checkbox"
                 checked={task.done}
-                on:click={checkTask}
+                on:click={(event) => {
+                  loadingId = task.id;
+                  checkTask(event);
+                }}
                 id={task.id}
                 class="clickable h-12 w-12 rounded-xl border-2 border-olive bg-fantasy p-3 text-xl text-flame outline-none focus:ring-0 focus-visible:border-olive focus-visible:outline-dashed focus-visible:outline-olive"
               />
               <button
-                class="clickable block grow text-left"
+                class="clickable block grow self-stretch text-left"
                 id={task.id}
                 on:click={(event) => {
                   loadingId = task.id;
                   editTask(event);
                 }}
               >
-                <p class="font-condensed text-2xl" id={task.id}>{task.title}</p>
-                <p class="font-condensed text-xl text-olive" id={task.id}>
-                  {task.description ?? ''}
-                </p>
+                <div class="flex items-start" id={task.id}>
+                  <p class="grow font-condensed text-2xl" id={task.id}>
+                    {task.title}
+                    {#if loadingId === task.id}<Spinner />{/if}
+                  </p>
+                </div>
+                {#if task.priority}
+                  <div class="flex items-center" id={task.id}>
+                    <p class="font-condensed text-xl text-olive" id={task.id}>
+                      {task.priority.name}
+                    </p>
+                    <div
+                      class="h-4 w-4 rounded-full {priorityLevelColors[task.priority.id - 1]}"
+                      id={task.id}
+                    ></div>
+                  </div>
+                {/if}
+                {#if task.description}
+                  <p class="font-condensed text-xl text-olive" id={task.id}>
+                    {task.description}
+                  </p>
+                {/if}
+                {#if task.durationEnabled}
+                  <p class="font-condensed text-xl text-olive" id={task.id}>
+                    {task.start?.toLocaleDateString('ru-RU')} - {task.end?.toLocaleDateString(
+                      'ru-RU'
+                    )}
+                  </p>
+                {/if}
               </button>
-              {#if loadingId === task.id}<Spinner />{/if}
             </li>
           {/each}
         </ul>
@@ -233,7 +280,7 @@
 {#if editingTask}
   <div class="fixed flex h-full w-full items-center justify-center bg-black/50">
     <div
-      class="color-fantasy flex max-h-screen w-full max-w-lg flex-col items-center space-y-8 overflow-y-scroll rounded-2xl p-12 md:max-w-4xl"
+      class="color-fantasy flex max-h-screen w-full max-w-lg flex-col items-center space-y-8 overflow-y-auto rounded-2xl p-12 md:max-w-4xl"
     >
       <form action="?/saveTask" method="POST" class="w-full" use:taskEnhance>
         <input type="hidden" name="id" bind:value={$taskSuperform.id} />
@@ -259,6 +306,14 @@
               disabled={!$durationEnabled}
             />
             <DateTimeInput field="end" label="Конец" form={taskForm} disabled={!$durationEnabled} />
+            <DropdownInput
+              field="priorityLevelId"
+              label="Приоритет"
+              form={taskForm}
+              options={[{ name: 'Нет', id: null }, ...priorityLevels].map((priorityLevel) => {
+                return { name: priorityLevel.name, value: priorityLevel.id };
+              })}
+            />
           </div>
         </div>
         <div class="min-h-[1.5rem] font-condensed text-flame">
@@ -295,7 +350,7 @@
 {#if editingBoard}
   <div class="fixed flex h-full w-full items-center justify-center bg-black/50">
     <div
-      class="color-fantasy flex max-h-screen w-full max-w-lg flex-col items-center space-y-8 overflow-y-scroll rounded-2xl p-12"
+      class="color-fantasy flex max-h-screen w-full max-w-lg flex-col items-center space-y-8 overflow-y-auto rounded-2xl p-12"
     >
       <form action="?/saveBoard" method="POST" class="w-full lg:w-96" use:boardEnhance>
         <input type="hidden" name="id" bind:value={$boardSuperform.id} />

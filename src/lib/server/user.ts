@@ -4,7 +4,9 @@ import type { Session } from 'lucia';
 
 type InitUserData = {
   characterClass: number;
-  avatar: number;
+  avatarBody: number;
+  avatarEyes: number;
+  avatarOutfit: number;
   session: Session;
 };
 
@@ -22,9 +24,19 @@ export const initUser = async (userData: InitUserData) => {
           id: userData.characterClass,
         },
       },
-      avatar: {
+      avatarBody: {
         connect: {
-          id: userData.avatar,
+          id: userData.avatarBody,
+        },
+      },
+      avatarEyes: {
+        connect: {
+          id: userData.avatarEyes,
+        },
+      },
+      avatarOutfit: {
+        connect: {
+          id: userData.avatarOutfit,
         },
       },
     },

@@ -1,6 +1,7 @@
 <script lang="ts">
   import '../app.css';
   import '@fontsource/press-start-2p';
+  import { clickOutside } from '$lib/utils/clickOutside';
   import type { PageData } from './$types';
   import logo from '$lib/assets/images/logo.svg?raw';
   import bell from '$lib/assets/icons/bell.svg?raw';
@@ -9,6 +10,8 @@
   import Container from '$lib/components/Container.svelte';
 
   export let data: PageData;
+
+  let profileOpen = false;
 
   type NavLink = {
     name: string;
@@ -36,10 +39,10 @@
       name: 'Календарь',
       link: '/calendar',
     },
-    {
-      name: 'ТЕСТОВОЕ',
-      link: '/test',
-    },
+    // {
+    //   name: 'ТЕСТОВОЕ',
+    //   link: '/test',
+    // },
   ];
 
   const navLinksUnauthorized: NavLink[] = [
@@ -88,12 +91,34 @@
           <a href="/" aria-label="Монеты" class="clickable flex items-center gap-2 p-2">
             <span>{@html coin}</span>999
           </a>
-          <a href="/" aria-label="Уведомления" class="clickable block p-2">
-            {@html bell}
-          </a>
-          <a href="/" aria-label="Профиль" class="clickable block p-2">
-            {@html user}
-          </a>
+          <div class="relative">
+            <button aria-label="Уведомления" class="clickable block p-2">
+              {@html bell}
+            </button>
+          </div>
+          <div class="relative">
+            <button
+              aria-label="Профиль"
+              class="clickable block p-2"
+              on:click={() => (profileOpen = !profileOpen)}
+            >
+              {@html user}
+            </button>
+            {#if profileOpen}
+              <div
+                class="color-fantasy absolute right-0 z-10 space-y-4 rounded-xl border-2 border-olive p-6"
+                use:clickOutside
+                on:click_outside={() => (profileOpen = false)}
+              >
+                <div>
+                  <p class="text-xl">{data.session.user.name}</p>
+                </div>
+                <form action="/logout" method="post">
+                  <button type="submit" class="btn color-flame">Выйти</button>
+                </form>
+              </div>
+            {/if}
+          </div>
         </div>
       {/if}
     </Container>

@@ -14,8 +14,9 @@ export const load: PageServerLoad = async ({ parent }) => {
     boardForm,
     boards: await prisma.taskBoard.findMany({
       where: { userId: data.user.id },
-      include: { tasks: true },
+      include: { tasks: { include: { priority: true } } },
     }),
+    priorityLevels: await prisma.priorityLevel.findMany({ orderBy: { level: 'asc' } }),
   };
 };
 

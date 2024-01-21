@@ -2,6 +2,8 @@
   import Container from '$lib/components/Container.svelte';
   import search from '$lib/assets/icons/search.svg?raw';
   import type { PageData } from './$types';
+  import Avatar from '$lib/components/Avatar.svelte';
+  import ShopOwnerImg from '$lib/assets/images/shop_owner.png';
 
   export let data: PageData;
 
@@ -13,19 +15,24 @@
 </svelte:head>
 
 <div class="color-sunset">
-  <Container class="flex flex-col gap-6 py-6 lg:flex-row">
-    <div class="color-fantasy rounded-xl flex items-center justify-center  mr-28">
-      <img src="src\lib\assets\images\shop_owner.png" alt="Торговец" class="h-60">
-      <div class="w-36 h-36 rounded-xl border-4 border-olive object-cover ml-9 mr-9" ></div>
-      <div class="w-36 h-36 rounded-xl border-4 border-olive object-cover ml-9 mr-9" ></div>
-      <div class="w-36 h-36 rounded-xl border-4 border-olive object-cover ml-9 mr-20" ></div>
+  <Container class="flex flex-col justify-between gap-6 py-6 lg:flex-row">
+    <div class="color-fantasy flex flex-col items-center justify-center rounded-xl p-6 lg:flex-row">
+      <img src={ShopOwnerImg} alt="Торговец" class="sm:h-52 w-auto" width="1000" height="566" />
+      <div class="flex flex-col gap-4 sm:flex-row">
+        <div class="h-36 w-36 rounded-xl border-2 border-olive object-cover"></div>
+        <div class="h-36 w-36 rounded-xl border-2 border-olive object-cover"></div>
+        <div class="h-36 w-36 rounded-xl border-2 border-olive object-cover"></div>
+      </div>
     </div>
-    
-    <div class="color-fantasy rounded-xl p-6 lg:h-64">
-      <img
-        alt={user.stats?.avatar.alt}
-        src="/avatars/{user.stats?.avatar.fileName}"
-        class="aspect-square h-full rounded-xl border-2 border-olive object-cover"
+
+    <div class="color-fantasy hidden rounded-xl p-6 lg:block">
+      <Avatar
+        avatar={{
+          body: user.stats?.avatarBody.fileName,
+          eyes: user.stats?.avatarEyes.fileName,
+          outfit: user.stats?.avatarOutfit.fileName,
+        }}
+        class="h-60"
       />
     </div>
   </Container>
@@ -54,8 +61,8 @@
       <p>Фильтрация</p>
     </div>
     <div class="grow rounded-xl border-2 border-burgundy p-6">
-      <div class="px-8 grid grid-cols-5 grid-rows-3">
-        <div class="w-36 h-36 rounded-xl border-4 border-olive object-cover mx-8 my-12" ></div>
+      <div class="grid grid-cols-5 grid-rows-3 px-8">
+        <div class="mx-8 my-12 h-36 w-36 rounded-xl border-4 border-olive object-cover"></div>
       </div>
     </div>
   </div>

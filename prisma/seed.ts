@@ -17,18 +17,55 @@ async function main() {
     });
   }
 
-  const avatars = [
-    { fileName: 'quefir.png', alt: 'Описание картинки' },
-    { fileName: 'test.png', alt: 'Описание картинки' },
-    { fileName: 'noooo.gif', alt: 'Описание картинки' },
+  const bodies = [
+    'cat1.png',
+    'cat2.png',
+    'cat3.png',
+    'dog1.png',
+    'dog2.png',
+    'dog3.png',
+    'rabbit1.png',
+    'rabbit2.png',
+    'rabbit3.png',
   ];
-  for (let i = 0; i < avatars.length; i++) {
-    const avatar = avatars[i];
+  const eyes = [
+    'eye1_blue.png',
+    'eye1_brown.png',
+    'eye1_green.png',
+    'eye2_blue.png',
+    'eye2_brown.png',
+    'eye2_green.png',
+  ];
+  const outfits = [
+    'outfit1_blue.png',
+    'outfit1_green.png',
+    'outfit1_pink.png',
+    'outfit2_blue.png',
+    'outfit2_green.png',
+    'outfit2_pink.png',
+    'outfit3_blue.png',
+    'outfit3_green.png',
+    'outfit3_pink.png',
+  ];
+  const avatarLayers = [
+    ...bodies.map((a) => {
+      return { fileName: a, type: 0 };
+    }),
+    ...eyes.map((a) => {
+      return { fileName: a, type: 1 };
+    }),
+    ...outfits.map((a) => {
+      return { fileName: a, type: 2 };
+    }),
+  ];
 
-    await prisma.avatar.upsert({
-      where: { fileName: avatar.fileName },
-      update: avatar,
-      create: avatar,
+  for (let i = 0; i < avatarLayers.length; i++) {
+    const avatarLayer = avatarLayers[i];
+
+    await prisma.avatarLayer.upsert({
+      where: { fileName: avatarLayer.fileName },
+      update: avatarLayer,
+      create: avatarLayer,
     });
   }
 
@@ -40,9 +77,11 @@ async function main() {
       where: { name: priority },
       update: {
         name: priority,
+        level: i + 1,
       },
       create: {
         name: priority,
+        level: i + 1,
       },
     });
   }

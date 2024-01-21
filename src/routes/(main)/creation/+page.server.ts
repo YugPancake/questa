@@ -12,7 +12,9 @@ export const load: PageServerLoad = async ({ parent }) => {
 
   return {
     classes: await prisma.characterClass.findMany(),
-    avatars: await prisma.avatar.findMany(),
+    avatarBodies: await prisma.avatarLayer.findMany({ where: { type: 0 } }),
+    avatarEyeSets: await prisma.avatarLayer.findMany({ where: { type: 1 } }),
+    avatarOutfits: await prisma.avatarLayer.findMany({ where: { type: 2 } }),
     form: await superValidate(createCharacterSchema),
   };
 };
@@ -30,10 +32,10 @@ export const actions: Actions = {
       return fail(400, { form });
     }
 
-    const { characterClass, avatar } = form.data;
+    const { characterClass, avatarBody, avatarEyes, avatarOutfit } = form.data;
 
     try {
-      await initUser({ characterClass, avatar, session });
+      await initUser({ characterClass, avatarBody, avatarEyes, avatarOutfit, session });
     } catch (err) {
       console.error(err);
 

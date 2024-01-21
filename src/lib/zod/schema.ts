@@ -34,7 +34,9 @@ export const signupSchema = z.object({
 
 export const createCharacterSchema = z.object({
   characterClass: z.number().int().nonnegative().default(-1),
-  avatar: z.number().int().nonnegative().default(-1),
+  avatarBody: z.number().int().nonnegative().default(-1),
+  avatarEyes: z.number().int().nonnegative().default(-1),
+  avatarOutfit: z.number().int().nonnegative().default(-1),
 });
 
 export const testRecordSchema = z.object({
@@ -49,7 +51,7 @@ export const taskSchema = z.object({
   start: z.string().optional(),
   end: z.string().optional(),
   durationEnabled: z.boolean().optional(),
-  // priorityLevelId: z.number().int().optional(),
+  priorityLevelId: z.number().int().nullable().optional(),
   // categoryId: z.number().int().optional(),
   boardId: z.string(),
 });
