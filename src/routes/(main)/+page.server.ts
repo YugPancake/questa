@@ -22,8 +22,6 @@ export const load: PageServerLoad = async ({ parent }) => {
 
 export const actions: Actions = {
   saveTask: async ({ request, locals }) => {
-    console.log('ssssssssssssssssss');
-
     const session = await locals.auth.validate();
     if (!session) {
       throw redirect(302, '/login');
@@ -61,8 +59,6 @@ export const actions: Actions = {
     }
   },
   saveBoard: async ({ request, locals }) => {
-    console.log('ssssssssssssssssss');
-
     const session = await locals.auth.validate();
     if (!session) {
       throw redirect(302, '/login');
