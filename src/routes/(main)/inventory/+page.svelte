@@ -3,10 +3,34 @@
   import search from '$lib/assets/icons/search.svg?raw';
   import CharacterSheet from '$lib/components/CharacterSheet.svelte';
   import type { PageData } from './$types';
+  import Item from '$lib/components/Item.svelte';
 
   export let data: PageData;
 
-  let { user } = data;
+  let { user, itemTypes, usersItems } = data;
+
+  const items = [...usersItems].map((userItem) => userItem.item);
+
+  let filteredItems = [...items];
+
+  const filterItemsAll = () => {
+    filteredItems = [...items];
+  };
+
+  filterItemsAll();
+
+  const filterItems = (id: number) => {
+    filteredItems = items.filter((item: any) => item.itemTypeId === id);
+  };
+
+  $: searchString = '';
+
+  $: searchedItems = filteredItems.filter((item) =>
+    searchString
+      ? item.name.toLowerCase().includes(searchString.toLowerCase()) ||
+        item.description?.toLowerCase().includes(searchString.toLowerCase())
+      : true
+  );
 </script>
 
 <svelte:head>
@@ -29,6 +53,7 @@
         id="search"
         class="input rounded-r-none border-r-0"
         placeholder="Поиск..."
+        bind:value={searchString}
       />
       <dir
         class="input my-0 flex w-fit items-center justify-center rounded-l-none border-l-0 p-0 text-flame"
@@ -42,12 +67,29 @@
   <div class="flex grow flex-col items-stretch gap-6 md:flex-row">
     <div class="rounded-xl border-2 border-burgundy p-6">
       <p>Фильтрация</p>
+      <ul>
+        <li>
+          <button class="clickable font-condensed" on:click={filterItemsAll}>Всё</button>
+        </li>
+        {#each itemTypes as itemType}
+          <li>
+            <button class="clickable font-condensed" on:click={() => filterItems(itemType.id)}>
+              {itemType.name}
+            </button>
+          </li>
+        {/each}
+      </ul>
     </div>
     <div class="grow rounded-xl border-2 border-burgundy p-6">
-      <div class="px-8 grid grid-cols-5 grid-rows-3">
-        <div class="w-36 h-36 rounded-xl border-4 border-olive object-cover mx-8 my-12" ></div>
-      </div>
+      <ul class="flex flex-wrap gap-4">
+        {#each searchedItems as item}
+          <li>
+            <button class="clickable">
+              <Item fileName={item.fileName} name={item.name} />
+            </button>
+          </li>
+        {/each}
+      </ul>
     </div>
   </div>
 </Container>
-

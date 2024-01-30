@@ -24,7 +24,9 @@
     validators: taskSchema,
     validationMethod: 'onblur',
     taintedMessage: null,
-    onUpdated: () => (editingTask = false),
+    onUpdated: ({ form }) => {
+      if (form.valid) editingTask = false;
+    },
   });
   $: ({ form: taskSuperform } = taskForm);
   $: ({ delayed: taskDelayed, enhance: taskEnhance, errors: taskErrors } = taskForm);
@@ -33,7 +35,9 @@
     validators: boardSchema,
     validationMethod: 'onblur',
     taintedMessage: null,
-    onUpdated: () => (editingBoard = false),
+    onUpdated: ({ form }) => {
+      if (form.valid) editingBoard = false;
+    },
   });
   $: ({ form: boardSuperform } = boardForm);
   $: ({ delayed: boardDelayed, enhance: boardEnhance, errors: boardErrors } = boardForm);

@@ -61,3 +61,7 @@ export const boardSchema = z.object({
   name: z.string().trim().min(1),
   // userId: z.string(),
 });
+
+export const itemBuySchema = z.object({
+  id: z.number().int().nonnegative().default(-1),
+});

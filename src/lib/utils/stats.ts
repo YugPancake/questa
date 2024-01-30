@@ -5,6 +5,8 @@ export const baseHealth = 100;
 const healthIncreasePerLevel = 25;
 
 export const experienceForPriority = [5, 10, 20]
+export const healthPenaltyForPriority = [5, 10, 20]
+export const coinsForPriority = [5, 10, 20]
 
 export const levelToExperience = (level: number) => {
   return Math.floor(Math.pow(level / amountCoefficient, increaseCoefficient));

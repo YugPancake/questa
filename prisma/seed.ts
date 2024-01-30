@@ -85,6 +85,118 @@ async function main() {
       },
     });
   }
+
+  type Item = {
+    name: string;
+    fileName: string;
+  };
+  type ItemTypes = {
+    name: string;
+    items: Item[];
+  };
+
+  const itemTypes: ItemTypes[] = [
+    {
+      name: 'Оружие',
+      items: [
+        {
+          name: 'Меч 1',
+          fileName: 'sword1.png',
+        },
+        {
+          name: 'Меч 2',
+          fileName: 'sword2.png',
+        },
+        {
+          name: 'Меч 3',
+          fileName: 'sword3.png',
+        },
+        {
+          name: 'Меч 4',
+          fileName: 'sword4.png',
+        },
+        {
+          name: 'Меч 5',
+          fileName: 'sword5.png',
+        },
+        {
+          name: 'Волшебная палочка',
+          fileName: 'magic_wand.png',
+        },
+      ],
+    },
+    {
+      name: 'Расходники',
+      items: [
+        {
+          name: 'Подарок',
+          fileName: 'gift.png',
+        },
+        {
+          name: 'Оливье',
+          fileName: 'olivye.png',
+        },
+        {
+          name: 'Карамельная трость',
+          fileName: 'sugar_candy.png',
+        },
+      ],
+    },
+    {
+      name: 'Снаряжение',
+      items: [
+        {
+          name: 'Носок',
+          fileName: 'сhristmas_sock.png',
+        },
+        {
+          name: 'Шарики',
+          fileName: 'christmas_toys.png',
+        },
+        {
+          name: 'Ёлка',
+          fileName: 'christmas_tree.png',
+        },
+      ],
+    },
+  ];
+  for (let i = 0; i < itemTypes.length; i++) {
+    const itemType = itemTypes[i];
+
+    const typeRecord = await prisma.itemType.upsert({
+      where: { name: itemType.name },
+      update: {
+        name: itemType.name,
+      },
+      create: {
+        name: itemType.name,
+      },
+    });
+
+    for (let j = 0; j < itemTypes[i].items.length; j++) {
+      const item = itemTypes[i].items[j];
+
+      await prisma.item.upsert({
+        where: { name: item.name },
+        update: {
+          name: item.name,
+          fileName: item.fileName,
+          itemTypeId: typeRecord.id,
+          cost: 10,
+          description:
+            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores totam maiores in omnis dignissimos commodi odio ipsam debitis sit nesciunt.',
+        },
+        create: {
+          name: item.name,
+          fileName: item.fileName,
+          itemTypeId: typeRecord.id,
+          cost: 10,
+          description:
+            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores totam maiores in omnis dignissimos commodi odio ipsam debitis sit nesciunt.',
+        },
+      });
+    }
+  }
 }
 
 main()

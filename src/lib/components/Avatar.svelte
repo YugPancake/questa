@@ -9,7 +9,7 @@
 </script>
 
 <div
-  class="relative aspect-[507/750] overflow-hidden rounded-xl border-2 border-olive object-cover {customClass}"
+  class="relative aspect-[507/750] overflow-hidden rounded-xl border-2 border-olive bg-fantasy object-cover {customClass}"
 >
   <img
     src={avatar.body ? `/sprites/${avatar.body}` : ''}

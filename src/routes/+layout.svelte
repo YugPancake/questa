@@ -11,6 +11,8 @@
 
   export let data: PageData;
 
+  $: ({ stats } = data);
+
   let profileOpen = false;
 
   type NavLink = {
@@ -89,7 +91,7 @@
         </nav>
         <div class="flex items-center justify-around text-fantasy">
           <a href="/" aria-label="Монеты" class="clickable flex items-center gap-2 p-2">
-            <span>{@html coin}</span>999
+            <span>{@html coin}</span>{stats.coins}
           </a>
           <div class="relative">
             <button aria-label="Уведомления" class="clickable block p-2">
