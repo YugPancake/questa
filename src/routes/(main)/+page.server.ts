@@ -58,7 +58,7 @@ export const actions: Actions = {
       return setError(form, '..........');
     }
   },
-  saveBoard: async ({ request, locals }) => {np
+  saveBoard: async ({ request, locals }) => {
     const session = await locals.auth.validate();
     if (!session) {
       throw redirect(302, '/login');
