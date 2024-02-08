@@ -185,7 +185,7 @@ async function main() {
           cost: 10,
           description:
             'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores totam maiores in omnis dignissimos commodi odio ipsam debitis sit nesciunt.',
-        },rf
+        },
         create: {
           name: item.name,
           fileName: item.fileName,
