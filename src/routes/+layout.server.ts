@@ -4,7 +4,7 @@ import prisma from '$lib/server/prisma';
 export const load: LayoutServerLoad = async ({ locals }) => {
   const session = await locals.auth.validate();
 
-  const stats = await prisma.userStats.findUnique({
+  const stats = await prisma.userStats.findFirst({
     where: { userId: session?.user.userId },
   });
 
