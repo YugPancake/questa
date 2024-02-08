@@ -62,8 +62,9 @@
 <div class="color-fantasy flex h-full min-h-screen flex-col justify-between break-words font-mono">
   <header class="color-flame">
     <Container class="flex flex-col items-center justify-between py-3 xl:flex-row">
-      <a href="/" aria-label="QUESTA" class="clickable block">
+      <a href="/" aria-label="QUESTA" class="clickable flex items-center">
         {@html logo}
+        <span class="text-4xl">QUESTA</span>
       </a>
       {#if !data.session?.user}
         <nav>

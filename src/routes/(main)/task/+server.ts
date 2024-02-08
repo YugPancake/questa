@@ -12,6 +12,11 @@ export const POST: RequestHandler = async ({ request, locals }) => {
     const task = await prisma.task.create({
       data: {
         title: `Задача ${now.toLocaleDateString('ru-RU')} ${now.toLocaleTimeString('ru-RU')}`,
+        priority: {
+          connect: {
+            id: 1
+          }
+        },
         board: {
           connect: {
             id: boardId,
@@ -20,7 +25,7 @@ export const POST: RequestHandler = async ({ request, locals }) => {
       },
     });
     console.log(JSON.stringify(task));
-    
+
     return new Response(JSON.stringify(task));
   } catch (error) {
     throw fail(404, { message: error });
