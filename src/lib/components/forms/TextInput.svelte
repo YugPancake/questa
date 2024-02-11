@@ -10,15 +10,15 @@
 
   export let form: SuperForm<ZodValidation<T>, unknown>;
   export let field: FormPathLeaves<z.infer<T>>;
-  export let label: String;
+  export let label: String | undefined = undefined;
 
   const { value, errors } = formFieldProxy(form, field);
 </script>
 
-<label class="label block" for={field}>
+<label class="label block w-full" for={field}>
   {#if label}<span class="block">{label}</span>{/if}
   <input
-    class="input"
+    class="input w-full"
     type="text"
     name={field}
     id={field}

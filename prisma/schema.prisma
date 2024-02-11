@@ -29,6 +29,12 @@ model User {
   stats      UserStats?
   taskBoards TaskBoard[]
   usersItems UsersItems[]
+
+  leadedGuild Guild[] @relation(name: "leader")
+
+  guild    Guild?        @relation(fields: [guildId], references: [id])
+  guildId  String?
+  messages ChatMessage[]
 }
 
 model UserStats {
@@ -146,6 +152,34 @@ model UsersItems {
   item   Item?   @relation(fields: [itemId], references: [id])
   userId String?
   itemId Int?
+}
+
+model Guild {
+  id String @id @default(uuid())
+
+  leader   User   @relation(name: "leader", fields: [leaderId], references: [id])
+  leaderId String
+
+  name  String
+  level Int    @default(1)
+
+  users    User[]
+  messages ChatMessage[]
+
+  createdAt DateTime @default(now())
+}
+
+model ChatMessage {
+  id Int @id @default(autoincrement())
+
+  text String
+
+  user    User   @relation(fields: [userId], references: [id])
+  guild   Guild  @relation(fields: [guildId], references: [id])
+  userId  String
+  guildId String
+
+  createdAt DateTime @default(now())
 }
 
 model Session {

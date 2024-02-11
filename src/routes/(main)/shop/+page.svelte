@@ -46,7 +46,7 @@
     validationMethod: 'onblur',
     taintedMessage: null,
     onUpdated: ({ form }) => {
-      if (form.valid) buyingItem = false;
+      if (form.valid) closeItemBuy();
     },
   });
   $: ({ form: itemBuySuperform } = itemBuyForm);

@@ -59,7 +59,16 @@ export const taskSchema = z.object({
 export const boardSchema = z.object({
   id: z.string().optional(),
   name: z.string().trim().min(1),
-  // userId: z.string(),
+});
+
+export const guildSchema = z.object({
+  id: z.string().optional(),
+  name: z.string().trim().min(1),
+});
+
+export const chatSchema = z.object({
+  message: z.string().trim().min(1),
+  guildId: z.string(),
 });
 
 export const itemBuySchema = z.object({

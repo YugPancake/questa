@@ -25,7 +25,7 @@
     validationMethod: 'onblur',
     taintedMessage: null,
     onUpdated: ({ form }) => {
-      if (form.valid) editingTask = false;
+      if (form.valid) closeTask();
     },
   });
   $: ({ form: taskSuperform } = taskForm);
@@ -36,7 +36,7 @@
     validationMethod: 'onblur',
     taintedMessage: null,
     onUpdated: ({ form }) => {
-      if (form.valid) editingBoard = false;
+      if (form.valid) closeBoard();
     },
   });
   $: ({ form: boardSuperform } = boardForm);
@@ -60,7 +60,7 @@
   };
 
   const editBoard = async (event: any) => {
-    const boardText = await fetch(`/board/${event.target.id}`, {
+    const boardText = await fetch(`/api/board/${event.target.id}`, {
       method: 'GET',
     });
     const board = JSON.parse(await boardText.text());
@@ -69,7 +69,7 @@
   };
 
   const createBoard = async (event: any) => {
-    const boardText = await fetch(`/board`, {
+    const boardText = await fetch(`/api/board`, {
       method: 'POST',
       body: JSON.stringify({ boardId: event.target.id }),
       headers: {
@@ -83,7 +83,7 @@
   };
 
   const deleteBoard = async (event: any) => {
-    await fetch(`/board/${event.target.id}`, {
+    await fetch(`/api/board/${event.target.id}`, {
       method: 'DELETE',
     });
 
@@ -108,7 +108,7 @@
   };
 
   const editTask = async (event: any) => {
-    const taskText = await fetch(`/task/${event.target.id}`, {
+    const taskText = await fetch(`/api/task/${event.target.id}`, {
       method: 'GET',
     });
     const task = JSON.parse(await taskText.text());
@@ -117,7 +117,7 @@
   };
 
   const checkTask = async (event: any) => {
-    await fetch(`/task/${event.target.id}`, {
+    await fetch(`/api/task/${event.target.id}`, {
       method: 'PATCH',
       body: JSON.stringify({ value: event.target.checked }),
       headers: {
@@ -130,7 +130,7 @@
   };
 
   const createTask = async (event: any) => {
-    const taskText = await fetch(`/task`, {
+    const taskText = await fetch(`/api/task`, {
       method: 'POST',
       body: JSON.stringify({ boardId: event.target.id }),
       headers: {
@@ -144,7 +144,7 @@
   };
 
   const deleteTask = async (event: any) => {
-    await fetch(`/task/${event.target.id}`, {
+    await fetch(`/api/task/${event.target.id}`, {
       method: 'DELETE',
     });
 
@@ -358,7 +358,7 @@
     >
       <form action="?/saveBoard" method="POST" class="w-full lg:w-96" use:boardEnhance>
         <input type="hidden" name="id" bind:value={$boardSuperform.id} />
-        <TextInput field="name" label="Новая доска" form={boardForm} />
+        <TextInput field="name" label="Название доски" form={boardForm} />
         <div class="min-h-[1.5rem] font-condensed text-flame">
           {#if $boardErrors?._errors}{$boardErrors?._errors.join('; ')}{/if}
         </div>
