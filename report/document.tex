@@ -5,6 +5,9 @@
 \usepackage{minted}
 \usepackage{dirtree}
 \usepackage{multirow}
+\usepackage{graphicx}
+
+\graphicspath{ {./images/} }
 
 \renewcommand{\listingscaption}{Код программы}
 
@@ -39,9 +42,6 @@
     \section{Требования к окружению}
     \subfile{subfiles/2-environment.tex}
     \newpage
-    \section{Архитектура системы (Общие требования)}
-    \subfile{subfiles/3-architecture.tex}
-    \newpage
     \section{Спецификация данных}
     \subfile{subfiles/4-data.tex}
     \newpage
@@ -68,7 +68,6 @@
     \newpage
     \printbibliography
     \subfile{subfiles/diary.tex}
-    \subfile{subfiles/practice-task.tex}
 \else
     \maketitle{thesis}
     \makethesistitlebackside

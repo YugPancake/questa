@@ -228,7 +228,7 @@
         <div class="flex flex-col gap-6 sm:flex-row">
           <div class="rounded-2xl bg-fantasy p-3 flex flex-col">
             <Bar max={getHealth(joinedGuild.level - 1)} value={joinedGuild.bossHealth} />
-            <img src="/{joinedGuild.boss.fileName}" alt="" class="max-w-[20rem]" />
+            <img src="/{joinedGuild.boss.fileName}" alt="" class="w-64" />
           </div>
           <div class="flex max-w-screen-sm grow flex-col">
             <p class="text-xl text-flame">Лог сражения:</p>
