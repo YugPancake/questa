@@ -1,3 +1,5 @@
+@import './prism.css';
+
 @font-face {
   font-family: 'Pizel';
   src:
@@ -70,4 +72,64 @@
   .input[disabled] {
     @apply cursor-not-allowed border-dashed border-burgundy/50 text-burgundy/50;
   }
+}
+.prose {
+  @apply font-condensed text-xl;
+}
+
+.prose a {
+  @apply text-flame;
+}
+
+.prose h1 {
+  @apply mb-2 mt-12 font-mono text-4xl;
+}
+
+.prose h2 {
+  @apply mb-2 mt-12 font-mono text-2xl;
+}
+
+.prose h3 {
+  @apply mb-2 mt-12 font-mono text-lg;
+}
+
+.prose h4 {
+  @apply mb-2 mt-12 font-mono text-base;
+}
+
+.prose h2 a,
+.prose h1 a {
+  @apply font-condensed text-xl;
+}
+
+.prose p {
+  @apply mb-4;
+}
+
+.prose ul {
+  @apply mb-4 list-inside;
+}
+
+.prose ul > li {
+  @apply list-disc;
+}
+
+.prose li > ul {
+  @apply ml-4;
+}
+
+.prose ol {
+  @apply mb-4 list-inside;
+}
+
+.prose ol > li {
+  @apply list-decimal;
+}
+
+.prose table {
+  @apply mb-4 w-full table-auto;
+}
+
+.prose table tr {
+  @apply border-b-2 border-burgundy;
 }

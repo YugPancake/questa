@@ -170,7 +170,7 @@
 
 <Container class="flex grow flex-col gap-6 py-6 lg:flex-row">
   {#if !joinedGuild}
-    <ul class="flex grow flex-col items-stretch">
+    <ul class="flex grow flex-col items-stretch gap-4">
       {#if guilds.length === 0}
         <div>
           Гильдий нет. Создайте первую!
