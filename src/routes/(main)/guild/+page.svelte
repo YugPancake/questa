@@ -8,6 +8,8 @@
   import Spinner from '$lib/components/Spinner.svelte';
   import TextInput from '$lib/components/forms/TextInput.svelte';
   import Avatar from '$lib/components/Avatar.svelte';
+  import Bar from '$lib/components/Bar.svelte';
+  import { getHealth } from '$lib/utils/stats';
 
   export let data: PageData;
 
@@ -169,6 +171,11 @@
 <Container class="flex grow flex-col gap-6 py-6 lg:flex-row">
   {#if !joinedGuild}
     <ul class="flex grow flex-col items-stretch">
+      {#if guilds.length === 0}
+        <div>
+          Гильдий нет. Создайте первую!
+        </div>
+      {/if}
       {#each guilds as guild}
         <li class="color-sunset rounded-xl p-4">
           <button
@@ -217,15 +224,40 @@
       >
       <div class="mt-4 h-auto rounded-2xl bg-sunset p-6">
         <p class="text-xl">Недельный Босс:</p>
-        <p class="text-2xl">Имя Босса</p>
+        <p class="text-2xl">{joinedGuild.boss.name}</p>
         <div class="flex flex-col gap-6 sm:flex-row">
-          <div class="aspect-square max-h-32 grow rounded-2xl bg-fantasy"></div>
+          <div class="rounded-2xl bg-fantasy p-3 flex flex-col">
+            <Bar max={getHealth(joinedGuild.level - 1)} value={joinedGuild.bossHealth} />
+            <img src="/{joinedGuild.boss.fileName}" alt="" class="max-w-[20rem]" />
+          </div>
           <div class="flex max-w-screen-sm grow flex-col">
             <p class="text-xl text-flame">Лог сражения:</p>
             <div
-              class="h-[20rem] grow overflow-y-auto rounded-2xl bg-fantasy"
+              class="h-[20rem] grow overflow-y-auto rounded-2xl bg-fantasy p-4"
               bind:this={logWindow}
-            ></div>
+            >
+              <ul>
+                {#each joinedGuild.logEntries as logEntry}
+                  <li class="flex justify-between">
+                    {#if logEntry.value === 0}
+                      <span class="text-olive">Босс побеждён!</span>
+                    {:else if logEntry.value === -1}
+                      <span class="text-flame">{joinedGuild.boss.name} Атакует!</span>
+                    {:else}
+                      <div>
+                        <span class="text-flame">{logEntry.user.name}:</span>
+                        {logEntry.value}
+                      </div>
+                      <div class="font-condensed text-sand">
+                        {`${logEntry.createdAt.toLocaleDateString(
+                          'ru-RU'
+                        )} ${logEntry.createdAt.toLocaleTimeString('ru-RU')}`}
+                      </div>
+                    {/if}
+                  </li>
+                {/each}
+              </ul>
+            </div>
           </div>
         </div>
       </div>

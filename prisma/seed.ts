@@ -197,6 +197,21 @@ async function main() {
       });
     }
   }
+
+  const bosses: Item[] = [
+    { fileName: 'sprites/cat1.png', name: 'Босс 1' },
+    { fileName: 'sprites/items/christmas_tree.png', name: 'Босс 2' },
+    { fileName: 'sprites/items/sword1.png', name: 'Босс 3' },
+  ];
+  for (let i = 0; i < bosses.length; i++) {
+    const boss = bosses[i];
+
+    await prisma.boss.upsert({
+      where: { name: boss.fileName },
+      update: boss,
+      create: boss,
+    });
+  }
 }
 
 main()

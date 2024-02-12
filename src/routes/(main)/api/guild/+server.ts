@@ -1,6 +1,7 @@
 import type { RequestHandler } from './$types';
 import prisma from '$lib/server/prisma';
 import { fail } from '@sveltejs/kit';
+import { baseHealth } from '$lib/utils/stats';
 
 export const POST: RequestHandler = async ({ locals }) => {
   const session = await locals.auth.validate();
@@ -8,7 +9,7 @@ export const POST: RequestHandler = async ({ locals }) => {
 
   try {
     const now = new Date();
-    const board = await prisma.guild.create({
+    const guild = await prisma.guild.create({
       data: {
         name: `Гильдия ${now.toLocaleDateString('ru-RU')} ${now.toLocaleTimeString('ru-RU')}`,
         leader: {
@@ -21,9 +22,15 @@ export const POST: RequestHandler = async ({ locals }) => {
             id: session.user.userId,
           },
         },
+        bossHealth: baseHealth,
+        boss: {
+          connect: {
+            id: (await prisma.boss.findFirst())!.id,
+          },
+        },
       },
     });
-    return new Response(JSON.stringify(board));
+    return new Response(JSON.stringify(guild));
   } catch (error) {
     throw fail(404, { message: error });
   }

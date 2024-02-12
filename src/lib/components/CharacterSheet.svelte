@@ -4,6 +4,7 @@
   import type { AvatarLayer, CharacterClass, User, UserStats } from '@prisma/client';
   import { experienceToLevel, getLevelProgress, getHealth } from '$lib/utils/stats';
   import Avatar from './Avatar.svelte';
+  import Bar from './Bar.svelte';
 
   export let user: User & {
     stats:
@@ -15,8 +16,6 @@
         })
       | null;
   };
-
-  const getPercentage = (max: number, value: number = 0) => (value / max) * 100;
 
   type Stat = {
     name: string;
@@ -52,19 +51,7 @@
     {#each [{ name: 'Здоровье', iconSvg: heart, max: getHealth(experienceToLevel(user.stats?.experience)), value: user.stats?.health }, { name: 'Опыт', iconSvg: star, max: getLevelProgress(user.stats?.experience).needed, value: getLevelProgress(user.stats?.experience).earned }] as stat}
       <div class="flex items-center gap-2 text-flame">
         {@html stat.iconSvg}
-        <div class="relative h-10 grow overflow-hidden rounded-full bg-sunset">
-          <div
-            class="flex h-full w-full items-center justify-end bg-flame p-2 font-condensed text-fantasy"
-          >
-            {stat.value}/{stat.max}
-          </div>
-          <div
-            class="absolute inset-0 flex h-full w-full items-center justify-end bg-sunset p-2 font-condensed text-flame"
-            style="clip-path: inset(0 0 0 {getPercentage(stat.max, stat.value)}%);%"
-          >
-            {stat.value}/{stat.max}
-          </div>
-        </div>
+        <Bar max={stat.max} value={stat.value} />
       </div>
     {/each}
   </div>

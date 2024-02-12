@@ -45,6 +45,36 @@ export const PATCH: RequestHandler = async ({ request, locals, params }) => {
       const newHealth = getHealth(experienceToLevel(newExperience)) - healthDifference;
       const newCoins = stats.coins + coinsForPriority[task.priority.level - 1] * (value ? 1 : -1);
 
+      const guild = await prisma.guild.findFirst({
+        where: { users: { some: { id: session.user.userId } } },
+      });
+
+      if (guild) {
+        const bossHealthDifference =
+          -experienceForPriority[task.priority.level - 1] * (value ? 1 : -1);
+        let newBossHealth = guild.bossHealth + bossHealthDifference;
+
+        let newLevel = guild.level;
+        if (newBossHealth <= 0 && guild.bossHealth > 0) {
+          newBossHealth = 0;
+
+          await prisma.logEntry.create({
+            data: { guildId: guild.id, userId: session.user.userId, value: 0 },
+          });
+
+          newLevel++;
+        }
+
+        await prisma.logEntry.create({
+          data: { guildId: guild.id, userId: session.user.userId, value: bossHealthDifference },
+        });
+
+        await prisma.guild.update({
+          where: { id: guild.id },
+          data: { bossHealth: newBossHealth, level: newLevel },
+        });
+      }
+
       await prisma.userStats.update({
         where: { userId: session.user.userId },
         data: { experience: newExperience, health: newHealth, coins: newCoins },

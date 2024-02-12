@@ -35,6 +35,7 @@ model User {
   guild    Guild?        @relation(fields: [guildId], references: [id])
   guildId  String?
   messages ChatMessage[]
+  LogEntry LogEntry[]
 }
 
 model UserStats {
@@ -166,7 +167,14 @@ model Guild {
   users    User[]
   messages ChatMessage[]
 
-  createdAt DateTime @default(now())
+  boss   Boss @relation(fields: [bossId], references: [id])
+  bossId Int
+
+  bossHealth Int @default(0)
+
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @default(now()) @updatedAt
+  logEntries LogEntry[]
 }
 
 model ChatMessage {
@@ -175,11 +183,32 @@ model ChatMessage {
   text String
 
   user    User   @relation(fields: [userId], references: [id])
-  guild   Guild  @relation(fields: [guildId], references: [id])
+  guild   Guild  @relation(fields: [guildId], references: [id], onDelete: Cascade)
   userId  String
   guildId String
 
   createdAt DateTime @default(now())
+}
+
+model Boss {
+  id Int @id @default(autoincrement())
+
+  name     String  @unique
+  fileName String  @unique
+  Guild    Guild[]
+}
+
+model LogEntry {
+  id Int @id @default(autoincrement())
+
+  value Int @default(0)
+
+  user  User  @relation(fields: [userId], references: [id])
+  guild Guild @relation(fields: [guildId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  userId    String
+  guildId   String
 }
 
 model Session {
